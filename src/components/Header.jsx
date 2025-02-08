@@ -1,15 +1,36 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { FaRegUserCircle } from "react-icons/fa";
+import { IoIosStarOutline, IoMdHeartEmpty, IoMdSearch } from "react-icons/io";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
     return (
         <>
-            <header className="bg-white text-center p-4 flex justify-between fixed top-0 w-screen z-20 shadow-lg shadow-slate-400">
-                <div>icona</div>
-                <div></div>
-                <div>login</div>
+            <header className="bg-cyan-900 text-center p-5 flex justify-between sticky top-0 z-30 text-white text-sm">
+                <NavLink>BoolB&B</NavLink>
+                <NavLink className="flex items-center gap-1">
+                    <IoIosStarOutline className="text-xl" />
+                    <span>Rent with BoolB&B</span>
+                </NavLink>
             </header>
-            <div
+
+            {/* navbar mobile*/}
+            <nav className="bg-[#fcfcfc] bottom-0 w-screen py-3 border-t-2 border-t-stone-300 z-10 fixed grid grid-cols-3">
+                <NavLink className="flex justify-center items-center  flex-col">
+                    <IoMdSearch className="text-2xl" />
+                    <span className="capitalize text-sm">explore</span>
+                </NavLink>
+                <NavLink className="flex justify-center items-center  flex-col">
+                    <IoMdHeartEmpty className="text-2xl" />
+                    <span className="capitalize text-sm">favourites</span>
+                </NavLink>
+                <NavLink className="flex justify-center items-center  flex-col">
+                    <FaRegUserCircle className="text-2xl" />
+                    <span className="capitalize text-sm">login</span>
+                </NavLink>
+            </nav>
+
+            {/* <div
                 style={{
                     backgroundImage: "url('/images/hero_image.jpg')",
                     backgroundPosition: "center",
@@ -17,7 +38,6 @@ const Header = () => {
                 }}
                 className="flex flex-col gap-4 justify-center items-center h-[60vh]  text-white sticky mt-[7vh]"
             >
-                {/* overlay */}
                 <div className="absolute bg-black/50 inset-0 -z-10"></div>
 
                 <div className="text-center">
@@ -34,7 +54,7 @@ const Header = () => {
                       placeholder="ciao"
                   />
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };
