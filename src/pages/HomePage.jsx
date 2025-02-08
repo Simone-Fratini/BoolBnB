@@ -25,13 +25,36 @@ function SearchBarMobile() {
 }
 
 function SearchAndFilterSection() {
+    const filters = [
+        'baita',
+        'villaschiera',
+        'indipendente',
+        'villa',
+        'appartment',
+        'chalet'
+    ];
+
     return (
         <>
-            <div className="border-b p-4 bg-white w-screen border-gray-300 sticky top-0 z-30">
-                qui ci va la sezione dei filtri
+            <div className="border-b p-3 bg-white w-screen border-gray-300 fixed top-0 z-10 rounded-b-2xl">
+                <div className="overflow-x-auto">
+                    <div className="flex gap-10 min-w-max px-2 [&>div]:w-[40px]">
+                        {filters.map((filter) => (
+                            <div key={filter} className="flex flex-col items-center gap-2">
+                                <img 
+                                    src={`/filter_imgs/${filter}.png`} 
+                                    alt={filter}
+                                    className="w-6 h-6 opacity-50"
+                                />
+                                <span className="text-xs text-gray-600">
+                                    {filter}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </>
-
     );
 }
 
@@ -41,7 +64,7 @@ function Jumbotron({ cardSecRef }) {
     };
 
     return (
-        <section className="h-[75vh] relative z-20 bg-gradient-to-br from-black to-cyan-950 text-white text-center flex flex-col gap-8 justify-center items-center p-6">
+        <section className="h-screen relative z-20 bg-gradient-to-br from-black to-cyan-950 text-white text-center flex flex-col gap-8 justify-center items-center p-6">
             <div
                 style={{ fontFamily: `"Noto Sans", serif` }}
                 className="flex flex-col gap-4"
