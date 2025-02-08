@@ -10,14 +10,6 @@ const Header = () => {
 
     return (
         <>
-            {property && (
-                <div className="w-[400px] aspect-square">
-                    <img
-                        src={`http://localhost:3000/images/${property.id}${property?.img_endpoints[0]}`}
-                        alt=""
-                    />
-                </div>
-            )}
             <header className="hidden sm:flex bg-cyan-900 text-center p-5 justify-between sticky top-[-1px] z-30 text-white text-sm">
                 <Link to="/">
                     <img
