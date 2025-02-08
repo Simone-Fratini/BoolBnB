@@ -7,13 +7,6 @@ import { NavLink, Link } from "react-router-dom";
 
 
 const Header = () => {
-    const [property, setProperty] = useState(null);
-
-    useEffect(() => {
-        axios
-            .get("http://localhost:3000/properties/1")
-            .then((res) => setProperty(res.data));
-    }, []);
 
     return (
         <>
