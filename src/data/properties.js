@@ -8,6 +8,11 @@ export const properties = [
         bathrooms: 2,
         pricePerNight: 150,
         rating: 4,
+        img: [
+            "https://placehold.co/600x400",
+            "https://placehold.co/600x400",
+            "https://placehold.co/600x400"
+        ]
     },
     {
         id: 2,
@@ -18,6 +23,11 @@ export const properties = [
         bathrooms: 1,
         pricePerNight: 120,
         rating: 3,
+        img: [
+            "https://placehold.co/600x400",
+            "https://placehold.co/600x400",
+            "https://placehold.co/600x400"
+        ]
     },
     {
         id: 3,
@@ -28,6 +38,11 @@ export const properties = [
         bathrooms: 3,
         pricePerNight: 200,
         rating: 5,
+        img: [
+            "https://placehold.co/600x400",
+            "https://placehold.co/600x400",
+            "https://placehold.co/600x400"
+        ]
     },
     {
         id: 4,
@@ -38,6 +53,11 @@ export const properties = [
         bathrooms: 2,
         pricePerNight: 180,
         rating: 4,
+        img: [
+            "https://placehold.co/600x400",
+            "https://placehold.co/600x400",
+            "https://placehold.co/600x400"
+        ]
     },
     {
         id: 5,

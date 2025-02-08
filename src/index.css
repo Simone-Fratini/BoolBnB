@@ -5,3 +5,47 @@
 body {
     @apply bg-[#fcfcfc] dark:bg-black;
 }
+
+/* Stili per i dots */
+.slick-dots {
+    bottom: 16px !important;
+    z-index: 10;
+}
+
+.slick-dots li button:before {
+    color: white !important;
+    font-size: 8px !important;
+    opacity: 0.7 !important;
+}
+
+.slick-dots li.slick-active button:before {
+    opacity: 1 !important;
+}
+
+/* Stili per le frecce */
+.slick-prev,
+.slick-next {
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+}
+
+.slick-prev {
+    left: 10px;
+}
+
+.slick-next {
+    right: 10px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-size: 30px;
+    opacity: 0.75;
+}
+
+/* Hover effects */
+.slick-prev:hover:before,
+.slick-next:hover:before {
+    opacity: 1;
+}

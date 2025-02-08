@@ -1,7 +1,9 @@
 import React from "react";
-import { FaRegUserCircle } from "react-icons/fa";
-import { IoIosStarOutline, IoMdHeartEmpty, IoMdSearch } from "react-icons/io";
+import { IoIosStarOutline, IoMdHeartEmpty, IoMdSearch, IoMdAddCircleOutline } from "react-icons/io";
+import { AiFillHome } from "react-icons/ai";
 import { NavLink, Link } from "react-router-dom";
+
+
 
 const Header = () => {
     return (
@@ -21,18 +23,20 @@ const Header = () => {
             </header>
 
             {/* navbar mobile*/}
-            <nav className="bg-[#fcfcfc] bottom-0 w-screen py-3 border-t-2 border-t-stone-300 z-10 fixed grid grid-cols-3">
-                <NavLink className="flex justify-center items-center  flex-col">
+            <nav className="bg-[#fcfcfc] bottom-[-1px] w-screen py-3 border-t-2 rounded-2xl border-t-stone-300 z-30 fixed grid grid-cols-3 md:hidden">
+                <NavLink to="/search" className="flex justify-center items-center  flex-col">
                     <IoMdSearch className="text-2xl" />
                     <span className="capitalize text-sm">explore</span>
                 </NavLink>
-                <NavLink className="flex justify-center items-center  flex-col">
-                    <IoMdHeartEmpty className="text-2xl" />
-                    <span className="capitalize text-sm">favourites</span>
+                <NavLink to="/" className="flex justify-center items-center  flex-col">
+                    <AiFillHome className="text-2xl" />
+
+                    <span className="capitalize text-sm">Home</span>
+                
                 </NavLink>
-                <NavLink className="flex justify-center items-center  flex-col">
-                    <FaRegUserCircle className="text-2xl" />
-                    <span className="capitalize text-sm">login</span>
+                <NavLink to="/addproperty" className="flex justify-center items-center  flex-col">
+                    <IoMdAddCircleOutline className="text-2xl" />
+                    <span className="capitalize text-sm">add property</span>
                 </NavLink>
             </nav>
         </>
