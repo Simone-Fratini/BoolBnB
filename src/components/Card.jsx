@@ -5,7 +5,7 @@ import { MdLocationOn, MdBed, MdBathroom } from "react-icons/md";
 import { TbRulerMeasure } from "react-icons/tb";
 
 function Card({ property }) {
-    const { host, location, rooms, bathrooms, pricePerNight, rating } =
+    const { title, host, location, rooms, bathrooms, pricePerNight, rating } =
         property;
     return (
         <div className="group cursor-pointer">
@@ -24,7 +24,7 @@ function Card({ property }) {
             {/* location and rating */}
             <div className="flex flex-col py-2 gap-1">
                 <div className="flex justify-between items-center px-1">
-                    <span className="font-medium">{location}</span>
+                    <span className="font-medium">{title}</span>
                     <span className="flex items-center gap-1">
                         <AiFillStar className="text-sm" />
                         {rating}
@@ -33,26 +33,28 @@ function Card({ property }) {
                 <span className="text-gray-500 text-sm px-1">Host: {host}</span>
                 
                 {/* details */}
-                <div className="grid grid-cols-2 gap-2 mt-1 text-gray-500 text-sm">
-                    <div className="flex items-center gap-1">
-                        <MdLocationOn className="text-lg" />
-                        <span>{location}</span>
+                <div className="flex flex-col gap-2 mt-1 text-gray-500 text-sm">
+                    <div className="flex justify-between">
+                        <div className="flex items-center gap-1">
+                            <MdLocationOn className="text-lg" />
+                            <span>{location}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                            <MdBed className="text-lg" />
+                            <span>{rooms} {rooms === 1 ? 'Room' : 'Rooms'}</span>
+                        </div>
                     </div>
-                    <div className="flex items-center gap-1">
-                        <MdBed className="text-lg" />
-                        <span>{rooms} {rooms === 1 ? 'Room' : 'Rooms'}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                        <MdBathroom className="text-lg" />
-                        <span>{bathrooms} {bathrooms === 1 ? 'Bath' : 'Baths'}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                        <TbRulerMeasure className="text-lg" />
-                        <span>120 m²</span>
+                    <div className="flex justify-between">
+                        <div className="flex items-center gap-1">
+                            <MdBathroom className="text-lg" />
+                            <span>{bathrooms} {bathrooms === 1 ? 'Bath' : 'Baths'}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                            <TbRulerMeasure className="text-lg" />
+                            <span>120 m²</span>
+                        </div>
                     </div>
                 </div>
-
-                
             </div>
         </div>
     );
