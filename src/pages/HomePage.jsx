@@ -9,7 +9,8 @@ function HomePage() {
     return (
         <>
             <Jumbotron cardSecRef={cardSecRef} />
-            <FilterSection />
+
+            <SearchAndFilterSection />
             <CardsSection cardSecRef={cardSecRef} title={""}>
                 {properties.map((prop) => (
                     <Card key={prop.id} property={prop} />
@@ -19,11 +20,17 @@ function HomePage() {
     );
 }
 
-function FilterSection() {
+function SearchBarMobile() {
+    return <div></div>;
+}
+
+function SearchAndFilterSection() {
     return (
-        <div className="border-y p-4 bg-white fixed w-screen top-18 z-10 border-black">
-            qui ci va la sezione dei filtri
-        </div>
+        <>
+            <div className="border-y p-4 bg-white fixed w-screen top-18 z-10 border-black">
+                qui ci va la sezione dei filtri
+            </div>
+        </>
     );
 }
 

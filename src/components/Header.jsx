@@ -6,7 +6,7 @@ import { NavLink, Link } from "react-router-dom";
 const Header = () => {
     return (
         <>
-            <header className="bg-cyan-900 text-center p-5 flex justify-between sticky top-0 z-30 text-white text-sm">
+            <header className="hidden sm:flex bg-cyan-900 text-center p-5 justify-between sticky top-[-1px] z-30 text-white text-sm">
                 <Link to="/">
                     <img
                         src="/bed-and-breakfast.png"
