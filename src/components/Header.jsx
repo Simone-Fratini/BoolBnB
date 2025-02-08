@@ -1,57 +1,42 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { FaSearchLocation } from "react-icons/fa";
+import { FaRegUserCircle } from "react-icons/fa";
+import { IoIosStarOutline, IoMdHeartEmpty, IoMdSearch } from "react-icons/io";
+import { NavLink, Link } from "react-router-dom";
 
 const Header = () => {
-  return (
-    <>
-      <header className="bg-white text-center p-4 flex justify-between fixed top-0 w-screen z-20 shadow-lg shadow-slate-400">
-        <div>
-          <Link to="/">
-            <img
-              src="/bed-and-breakfast.png"
-              alt="logo"
-              className="w-12 h-12"
-            />
-          </Link>
-        </div>
-        <div className="relative">
-          <FaSearchLocation className="absolute right-3 top-5 -translate-y-1/2 text-gray-500 text-xl z-2313123" />
-          <input
-            type="text"
-            className="border bg-[#fcfcfc] border-slate-400 px-4 py-2 rounded-lg relative z-30 w-100"
-          />
-        </div>
-        <div>login</div>
-      </header>
-      <div
-        style={{
-          backgroundImage: "url('/images/hero_image.jpg')",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-        }}
-        className="flex flex-col gap-4 justify-center items-center h-[60vh]  text-white sticky mt-[7vh]"
-      >
-        {/* overlay */}
-        <div className="absolute bg-black/50 inset-0 -z-10"></div>
+    return (
+        <>
+            <header className="hidden sm:flex bg-cyan-900 text-center p-5 justify-between sticky top-[-1px] z-30 text-white text-sm">
+                <Link to="/">
+                    <img
+                        src="/bed-and-breakfast.png"
+                        alt="logo"
+                        className="w-10 h-10"
+                    />
+                </Link>
+                <NavLink className="flex items-center gap-1">
+                    <IoIosStarOutline className="text-xl" />
+                    <span>Rent with BoolB&B</span>
+                </NavLink>
+            </header>
 
-        <div className="text-center">
-          <h1 className="text-3xl">Title casual</h1>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor,
-            corporis!
-          </p>
-        </div>
-        <div className="relative z-30">
-          <input
-            type="text"
-            className="border bg-[#fcfcfc] border-slate-400 px-4 py-2 rounded-lg relative z-30"
-            placeholder="ciao"
-          />
-        </div>
-      </div>
-    </>
-  );
+            {/* navbar mobile*/}
+            <nav className="bg-[#fcfcfc] bottom-0 w-screen py-3 border-t-2 border-t-stone-300 z-10 fixed grid grid-cols-3">
+                <NavLink className="flex justify-center items-center  flex-col">
+                    <IoMdSearch className="text-2xl" />
+                    <span className="capitalize text-sm">explore</span>
+                </NavLink>
+                <NavLink className="flex justify-center items-center  flex-col">
+                    <IoMdHeartEmpty className="text-2xl" />
+                    <span className="capitalize text-sm">favourites</span>
+                </NavLink>
+                <NavLink className="flex justify-center items-center  flex-col">
+                    <FaRegUserCircle className="text-2xl" />
+                    <span className="capitalize text-sm">login</span>
+                </NavLink>
+            </nav>
+        </>
+    );
 };
 
 export default Header;

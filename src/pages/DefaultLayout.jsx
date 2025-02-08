@@ -10,7 +10,7 @@ function DefaultLayout() {
             <Main>
                 <Outlet />
             </Main>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 }
