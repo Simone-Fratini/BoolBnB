@@ -27,10 +27,11 @@ function SearchBarMobile() {
 function SearchAndFilterSection() {
     return (
         <>
-            <div className="border-y p-4 bg-white fixed w-screen top-18 z-10 border-black">
+            <div className="border-b p-4 bg-white w-screen border-gray-300 sticky top-0 z-30">
                 qui ci va la sezione dei filtri
             </div>
         </>
+
     );
 }
 
