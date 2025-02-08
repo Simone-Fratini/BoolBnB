@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 function Card({ property }) {
-    const { title, host, location, rooms, bathrooms, pricePerNight, rating, images } = property;
+    const { title, host, location, rooms, bathrooms, pricePerNight, rating, img } = property;
 
     const settings = {
         dots: true,
@@ -17,33 +17,31 @@ function Card({ property }) {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: true,
-        autoplay: true,
-        autoplaySpeed: 3000,
+        autoplay: false,
+        className: "slides-container",
     };
 
     return (
         <div className="group cursor-pointer">
             {/* Image carousel */}
-            <div className="relative w-full aspect-square">
-                <div className="w-full h-full bg-gray-200 rounded-xl overflow-hidden">
-                    {images && images.length > 0 ? (
-                        <Slider {...settings} className="w-full h-full">
-                            {images.map((image, index) => (
-                                <div key={index} className="w-full h-full">
-                                    <img
-                                        src={image}
-                                        alt={`Property ${index + 1}`}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </div>
-                            ))}
-                        </Slider>
-                    ) : (
-                        <div className="w-full h-full bg-red-950 flex items-center justify-center text-white">
-                            SPAZIO PER IMMAGINE
-                        </div>
-                    )}
-                </div>
+            <div className="relative w-full aspect-square rounded-xl overflow-hidden">
+                {img && img.length > 0 ? (
+                    <Slider {...settings}>
+                        {img.map((image, index) => (
+                            <div key={index} className="aspect-square">
+                                <img
+                                    src={image}
+                                    alt={`Property image`}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                        ))}
+                    </Slider>
+                ) : (
+                    <div className="w-full h-full bg-red-950 flex items-center justify-center text-white">
+                        SPAZIO PER IMMAGINE
+                    </div>
+                )}
                 {/* hearth */}
                 <button className="absolute top-3 right-3 p-2 hover:opacity-80 transition-opacity z-10">
                     <IoMdHeartEmpty className="text-2xl text-white drop-shadow-lg" />

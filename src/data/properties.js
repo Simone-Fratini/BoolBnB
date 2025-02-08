@@ -53,6 +53,11 @@ export const properties = [
         bathrooms: 2,
         pricePerNight: 180,
         rating: 4,
+        img: [
+            "https://placehold.co/600x400",
+            "https://placehold.co/600x400",
+            "https://placehold.co/600x400"
+        ]
     },
     {
         id: 5,
