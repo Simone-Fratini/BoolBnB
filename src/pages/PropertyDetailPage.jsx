@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import { GlobalContext } from "../Context/GlobalContext";
 
 function PropertyDetail() {
-  return (
-    <div>PropertyDetail</div>
-  )
+  return <div>PropertyDetail</div>;
 }
 
-export default PropertyDetail
+export default PropertyDetail;
