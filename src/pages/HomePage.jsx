@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import CardsSection from "../components/CardsSection";
 import { properties } from "../data/properties";
 import Card from "../components/Card";
-import { Link } from "react-router-dom";
 
 function HomePage() {
     const cardSecRef = useRef(null);
@@ -22,7 +21,7 @@ function HomePage() {
 
 function FilterSection() {
     return (
-        <div className="border-y p-4 bg-white fixed w-screen top-14 z-10 border-black">
+        <div className="border-y p-4 bg-white fixed w-screen top-18 z-10 border-black">
             qui ci va la sezione dei filtri
         </div>
     );

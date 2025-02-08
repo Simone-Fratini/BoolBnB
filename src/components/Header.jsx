@@ -1,13 +1,19 @@
 import React from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoIosStarOutline, IoMdHeartEmpty, IoMdSearch } from "react-icons/io";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const Header = () => {
     return (
         <>
             <header className="bg-cyan-900 text-center p-5 flex justify-between sticky top-0 z-30 text-white text-sm">
-                <NavLink>BoolB&B</NavLink>
+                <Link to="/">
+                    <img
+                        src="/bed-and-breakfast.png"
+                        alt="logo"
+                        className="w-10 h-10"
+                    />
+                </Link>
                 <NavLink className="flex items-center gap-1">
                     <IoIosStarOutline className="text-xl" />
                     <span>Rent with BoolB&B</span>
@@ -29,32 +35,6 @@ const Header = () => {
                     <span className="capitalize text-sm">login</span>
                 </NavLink>
             </nav>
-
-            {/* <div
-                style={{
-                    backgroundImage: "url('/images/hero_image.jpg')",
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                }}
-                className="flex flex-col gap-4 justify-center items-center h-[60vh]  text-white sticky mt-[7vh]"
-            >
-                <div className="absolute bg-black/50 inset-0 -z-10"></div>
-
-                <div className="text-center">
-                    <h1 className="text-3xl">Title casual</h1>
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Dolor, corporis!
-                    </p>
-                </div>
-                <div className="relative z-30">
-                  <input
-                      type="text"
-                      className="border bg-[#fcfcfc] border-slate-400 px-4 py-2 rounded-lg relative z-30"
-                      placeholder="ciao"
-                  />
-                </div>
-            </div> */}
         </>
     );
 };
