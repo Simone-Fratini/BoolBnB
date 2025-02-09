@@ -5,6 +5,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { GiFamilyHouse } from "react-icons/gi";
 import { MdOutlineLocationCity } from "react-icons/md";
 import { imagesUrl } from "../globals/apiUrls";
+import PaginaContact from "../components/PaginaContact";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -15,7 +16,9 @@ function PropertyDetail() {
   const { id } = useParams();
   const [isLiked, setIsLiked] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0); // Indice dell'immagine principale
+  // function  addReview(){
 
+  // }
   //* ACTIONS
   const handleThumbnailClick = (index) => {
     setActiveIndex(index);
@@ -46,6 +49,7 @@ function PropertyDetail() {
   // chiamata fallita
   if (isErrorP || isErrorR) return <pre>Error</pre>;
   // risposta ricevuta
+
   return (
     <div className="property-detail mx-auto p-4 sm:p-6 lg:p-8 max-w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
       <section>
@@ -113,7 +117,7 @@ function PropertyDetail() {
           <GiFamilyHouse />
           Tipo di proprietà: {property.property_type}
         </p>
-        <div>
+        <div className="mt-4">
           <MapContainer
             center={
               property.city === "Roma"
@@ -135,7 +139,7 @@ function PropertyDetail() {
                 : [41.9028, 12.4964] // Default (Roma)
             }
             zoom={13}
-            style={{ height: "500px", width: "100%" }}
+            className="leaflet-container"
           >
             {/* Layer di OpenStreetMap */}
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -161,13 +165,12 @@ function PropertyDetail() {
                   ? [45.0703, 7.6869]
                   : [41.9028, 12.4964] // Default (Roma)
               }
-            >
-              <Popup>
-                Benvenuto a {property.city ? property.city : "Roma"}! 🇮🇹
-              </Popup>
-            </Marker>
+            ></Marker>
           </MapContainer>
         </div>
+      </section>
+      <section>
+        <PaginaContact />
       </section>
       <section className="border-1 rounded-[3vw]  flex max-w-96 m-auto justify-center  p-2 gap-5">
         <div className="flex justify-between">
