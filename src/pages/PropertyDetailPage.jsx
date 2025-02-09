@@ -6,7 +6,7 @@ import { GiFamilyHouse } from "react-icons/gi";
 import { MdOutlineLocationCity } from "react-icons/md";
 // import { imagesUrl } from "../globals/apiUrls";
 // import React, { Component } from "react";
-import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
+// import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
 import { useGetPropertyQuery, useGetReviewsQuery } from "../hooks/useDataQuery";
 
 function PropertyDetail() {
