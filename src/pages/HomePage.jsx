@@ -72,7 +72,7 @@ function Jumbotron({ cardSecRef }) {
     };
 
     return (
-        <section className="h-[77vh] relative z-20 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2">
+        <section className="h-screen relative z-20 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2">
             <div className=" flex flex-col gap-8 items-start">
                 <div
                     style={{ fontFamily: `"Noto Sans", serif` }}
@@ -124,7 +124,7 @@ function Jumbotron({ cardSecRef }) {
                 </div>
             </div>
             <div className="hidden lg:block h-full relative -translate-y-2">
-                <div className="absolute bg-amber-700 w-65 aspect-square -rotate-4 -translate-y-4 rounded-lg"></div>
+                <div className="absolute bg-amber-700 w-65 aspect-square -rotate-4 -translate-y-8 rounded-lg"></div>
                 <div className="absolute bg-amber-500 w-70 aspect-square rotate-10 -translate-x-4 right-0 rounded-lg"></div>
                 <div className="absolute bg-amber-600 w-75 aspect-square -rotate-7 translate-y-3 -translate-x-6 bottom-0 rounded-lg"></div>
                 <div className="absolute bg-amber-800 w-77 aspect-square rotate-2 translate-y-9 -translate-x-3 bottom-0 right-0 rounded-lg"></div>
