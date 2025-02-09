@@ -2,10 +2,10 @@ import { address } from "motion/react-client";
 import React from "react";
 import { useState, useContext } from "react";
 import { CgDanger } from "react-icons/cg";
-import { GlobalContext } from "../Context/GlobalContext";
+// import { GlobalContext } from "../Context/GlobalContext";
 
 function AddPropertyPage() {
-  const { AddProperty } = useContext(GlobalContext);
+  // const { AddProperty } = useContext(GlobalContext);
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
@@ -66,7 +66,7 @@ function AddPropertyPage() {
     event.preventDefault();
 
     if (validateForm()) {
-      AddProperty(formData);
+      // AddProperty(formData);
       console.log("Form data inviato:", formData);
     } else {
       console.log("Form data non inviato:", formData);
