@@ -81,7 +81,7 @@ function Card({ property }) {
 
                             <span>
                                 {n_bedrooms}{" "}
-                                {n_bedrooms === 1 ? "Room" : "Rooms"}
+                                {n_bedrooms === 1 ? "Stanza" : "Stanze"}
                             </span>
                         </div>
                     </div>
@@ -90,7 +90,7 @@ function Card({ property }) {
                             <MdBathroom className="text-lg" />
                             <span>
                                 {n_bathrooms}{" "}
-                                {n_bathrooms === 1 ? "Bath" : "Baths"}
+                                {n_bathrooms === 1 ? "Bagno" : "Bagni"}
                             </span>
                         </div>
                         <div className="flex items-center gap-1">
