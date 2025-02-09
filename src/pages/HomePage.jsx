@@ -48,7 +48,7 @@ function Jumbotron({ cardSecRef }) {
     };
 
     return (
-        <section className="h-[75vh] relative z-20 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2">
+        <section className="h-[77vh] relative z-20 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2">
             <div className=" flex flex-col gap-8 items-start">
                 <div
                     style={{ fontFamily: `"Noto Sans", serif` }}
@@ -64,7 +64,7 @@ function Jumbotron({ cardSecRef }) {
                 </div>
                 <div
                     style={{ fontFamily: `"Noto Sans", serif` }}
-                    className="flex flex-col rounded-lg p-4 text-sm gap-4 shadow-lg "
+                    className="flex flex-col  rounded-lg p-4 text-sm gap-4 shadow-lg "
                 >
                     <div className="font-semibold lg:font-light lg:text-base">
                         <span>

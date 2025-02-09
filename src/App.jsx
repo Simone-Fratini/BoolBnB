@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import SearchPropertyPage from "./pages/SearchPropertyPage";
 import AddPropertyPage from "./pages/AddPropertyPage";
 import PropertyDetail from "./pages/PropertyDetailPage";
-import { GlobalProvider } from "./Context/GlobalContext";
+// import { GlobalProvider } from "./Context/GlobalContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -12,7 +12,7 @@ const queryClient = new QueryClient();
 function App() {
     return (
         <QueryClientProvider client={queryClient}>
-            <GlobalProvider>
+            {/* <GlobalProvider> */}
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" Component={DefaultLayout}>
@@ -32,7 +32,7 @@ function App() {
                         </Route>
                     </Routes>
                 </BrowserRouter>
-            </GlobalProvider>
+            {/* </GlobalProvider> */}
         </QueryClientProvider>
     );
 }
