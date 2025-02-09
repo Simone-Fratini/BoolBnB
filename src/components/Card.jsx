@@ -6,7 +6,7 @@ import { TbRulerMeasure } from "react-icons/tb";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { imagesUrl } from "../globals/apiUrls";
+import { baseUrl, imagesUrl, propsEndpoint } from "../globals/apiUrls";
 
 function Card({ property }) {
     const {
@@ -31,7 +31,10 @@ function Card({ property }) {
     };
 
     return (
-        <div className="group cursor-pointer">
+        <Link
+            to={"detail/" + id}
+            className="group cursor-pointer"
+        >
             {/* Image carousel */}
             <div className="relative w-full aspect-square rounded-xl overflow-hidden">
                 {img_endpoints && img_endpoints.length > 0 ? (
@@ -97,7 +100,7 @@ function Card({ property }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 }
 
