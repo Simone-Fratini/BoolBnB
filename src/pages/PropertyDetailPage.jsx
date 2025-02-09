@@ -33,7 +33,11 @@ function PropertyDetail() {
         const newReview = textArea?.value;
         if (!newReview || !newReview.length)
             return console.log("recensione deve avere caratteri");
-        mutate({ property_id: id, title: "prova title", description: newReview });
+        mutate({
+            property_id: id,
+            title: "prova title",
+            description: newReview,
+        });
     };
 
     const toggleLike = () => {
@@ -61,6 +65,7 @@ function PropertyDetail() {
     // chiamata fallita
     if (isErrorP || isErrorR) return <pre>Error</pre>;
     // risposta ricevuta
+    console.log(reviews)
     return (
         <div className="property-detail mx-auto p-4 sm:p-6 lg:p-8 max-w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
             <section>
@@ -138,7 +143,7 @@ function PropertyDetail() {
                     <GiFamilyHouse />
                     Tipo di proprietà: {property.property_type}
                 </p>
-                <div>
+                <div className="relative z-0">
                     <MapContainer
                         center={
                             property.city === "Roma"

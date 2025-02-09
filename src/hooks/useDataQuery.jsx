@@ -76,38 +76,36 @@ export const useAddReviewQuery = (id) => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (newReview) => {
-            console.log(newReview)
+            console.log(newReview);
             const res = await addReview(newReview);
             console.log(res.data);
             return res.data;
         },
-        onSuccess: () => {
+        //* optimistic update
+        // onMutate mostra gia la "risposta" non sincronizzata e salva in una var i vecchi dati di reviews
+        onMutate: async (newReview) => {
+            await queryClient.cancelQueries(["reviews", id]);
+            const previousReviews = queryClient.getQueryData(["reviews", id]);
+            queryClient.setQueryData(["reviews", id], (oldQueryData) => {
+                return [
+                    ...oldQueryData,
+                    { id: findMaxId(oldQueryData) + 1, ...newReview },
+                ];
+            });
+            return {
+                previousReviews,
+            };
+        },
+        // onError riprende i vecchi dati di reviews e li resetta nella cache con queryKey reviews in caso di errore
+        onError: (_error, _reviews, context) => {
+            queryClient.setQueryData(["reviews", id], context.previousReviews);
+        },
+        // effettivo sync dei dati tra client e server con fetch in background
+        onSettled: () => {
             queryClient.invalidateQueries(["reviews", id]);
         },
-        // //* optimistic update
-        // // onMutate mostra gia la "risposta" non sincronizzata e salva in una var i vecchi dati di reviews
-        // onMutate: async (newReview) => {
-        //     await queryClient.cancelQueries(["reviews", id]);
-        //     const previousReviews = queryClient.getQueryData(["reviews", id]);
-        //     queryClient.setQueryData(["reviews", id], (oldQueryData) => {
-        //         return [
-        //             ...oldQueryData,
-        //             { id: findMaxId(oldQueryData), ...newReview },
-        //         ];
-        //     });
-        //     return {
-        //         previousReviews,
-        //     };
-        // },
-        // // onError riprende i vecchi dati di reviews e li risetta nella cache con queryKey reviews in caso di errore
-        // onError: (_error, _reviews, context) => {
-        //     queryClient.setQueryData(
-        //         ["reviews", id],
-        //         context.previousReviews
-        //     );
-        // },
-        // // effettivo sync dei dati tra client e server con fetch in background
-        // onSettled: () => {
+        // // * no optimistic update
+        // onSuccess: () => {
         //     queryClient.invalidateQueries(["reviews", id]);
         // },
     });
