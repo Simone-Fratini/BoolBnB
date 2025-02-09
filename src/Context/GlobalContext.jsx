@@ -1,10 +1,12 @@
 import axios from "axios";
 import { createContext, useState, useEffect } from "react";
+import {
+    baseUrl,
+    propsEndpoint,
+    revsEndpoint,
+} from "../globals/apiUrls";
 
 const GlobalContext = createContext();
-const myUrl = "http://localhost:3000";
-const propertiesEndPoint = "/properties";
-const reviewsEndPoint = "/reviews";
 
 const GlobalProvider = ({ children }) => {
   const [properties, setProperties] = useState([]);
@@ -14,7 +16,7 @@ const GlobalProvider = ({ children }) => {
   // Funzione per recuperare tutte le proprietà
   const getProperties = () => {
     axios
-      .get(myUrl + propertiesEndPoint)
+      .get(baseUrl + propsEndpoint)
       .then((res) => setProperties(res.data))
       .catch((error) => console.error(error));
   };
@@ -22,7 +24,7 @@ const GlobalProvider = ({ children }) => {
   //  recuperare le recensioni di una proprietà
   const getReviews = (propertyId) => {
     axios
-      .get(`${myUrl}${reviewsEndPoint}?propertyId=${propertyId}`)
+      .get(`${baseUrl}${revsEndpoint}?propertyId=${propertyId}`)
       .then((res) => setReviews(res.data))
       .catch((error) => console.error(error));
   };
@@ -30,7 +32,7 @@ const GlobalProvider = ({ children }) => {
   // Funzione per aggiungere una recensione
   const addReview = (propertyId, newReview) => {
     axios
-      .post(myUrl + reviewsEndPoint, { propertyId, review: newReview })
+      .post(baseUrl + revsEndpoint, { propertyId, review: newReview })
       .then((res) => {
         setReviews([...reviews, res.data]);
       })

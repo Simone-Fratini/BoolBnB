@@ -6,9 +6,8 @@ import { GiFamilyHouse } from "react-icons/gi";
 import { MdOutlineLocationCity } from "react-icons/md";
 import axios from "axios";
 import { GlobalContext } from "../Context/GlobalContext";
+import { baseUrl, propsEndpoint, imagesUrl } from "../globals/apiUrls";
 
-const myUrl = "http://localhost:3000";
-const propertiesEndPoint = "/properties";
 
 function PropertyDetail() {
   const { id } = useParams();
@@ -19,7 +18,7 @@ function PropertyDetail() {
 
   useEffect(() => {
     axios
-      .get(`${myUrl}${propertiesEndPoint}/${id}`)
+      .get(`${baseUrl}${propsEndpoint}/${id}`)
       .then((res) => {
         setSelectedProperty(res.data);
         getReviews(id);
@@ -27,7 +26,7 @@ function PropertyDetail() {
       .catch((error) => {
         console.error("Errore nel recupero della proprietà", error);
       });
-  }, [id, getReviews]);
+  }, []);
 
   const handleThumbnailClick = (index) => {
     setActiveIndex(index);
@@ -46,7 +45,7 @@ function PropertyDetail() {
       <div className="flex flex-col sm:flex-row sm:space-x-4">
         <div className="flex-1 mb-4 sm:mb-0">
           <img
-            src={`http://localhost:3000/images/${selectedProperty.id}${selectedProperty.img_endpoints[activeIndex]}`}
+            src={`${imagesUrl}/${selectedProperty.id}${selectedProperty.img_endpoints[activeIndex]}`}
             alt={`Property Image ${activeIndex + 1}`}
             className="w-full h-80 rounded-lg object-cover"
           />
@@ -56,7 +55,7 @@ function PropertyDetail() {
           {selectedProperty.img_endpoints.map((img, index) => (
             <img
               key={index}
-              src={`http://localhost:3000/images/${selectedProperty.id}${img}`}
+              src={`${imagesUrl}/${selectedProperty.id}${img}`}
               alt={`Thumbnail ${index + 1}`}
               className={`w-20 h-20 rounded-lg cursor-pointer transition-transform transform hover:scale-105 ${
                 activeIndex === index ? "border-2 border-blue-500" : ""
