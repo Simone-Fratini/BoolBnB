@@ -6,10 +6,19 @@ import { TbRulerMeasure } from "react-icons/tb";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { imagesUrl } from "../globals/apiUrls";
 
 function Card({ property }) {
-    const { title, host, location, rooms, bathrooms, pricePerNight, rating, img } = property;
-
+    const {
+        id,
+        title,
+        host,
+        location,
+        n_bedrooms,
+        n_bathrooms,
+        rating,
+        img_endpoints,
+    } = property;
     const settings = {
         dots: true,
         infinite: true,
@@ -25,13 +34,13 @@ function Card({ property }) {
         <div className="group cursor-pointer">
             {/* Image carousel */}
             <div className="relative w-full aspect-square rounded-xl overflow-hidden">
-                {img && img.length > 0 ? (
+                {img_endpoints && img_endpoints.length > 0 ? (
                     <Slider {...settings}>
-                        {img.map((image, index) => (
+                        {img_endpoints.map((image, index) => (
                             <div key={index} className="aspect-square">
                                 <img
-                                    src={image}
-                                    alt={`Property image`}
+                                    src={imagesUrl + `/${id}/` + image}
+                                    alt={image}
                                     className="w-full h-full object-cover"
                                 />
                             </div>
@@ -57,7 +66,7 @@ function Card({ property }) {
                     </span>
                 </div>
                 <span className="text-gray-500 text-sm px-1">Host: {host}</span>
-                
+
                 {/* details */}
                 <div className="flex flex-col gap-2 mt-1 text-gray-500 text-sm">
                     <div className="flex justify-between">
@@ -67,13 +76,19 @@ function Card({ property }) {
                         </div>
                         <div className="flex items-center gap-1">
                             <MdBed className="text-lg" />
-                            <span>{rooms} {rooms === 1 ? 'Room' : 'Rooms'}</span>
+                            <span>
+                                {n_bedrooms}{" "}
+                                {n_bedrooms === 1 ? "Room" : "Rooms"}
+                            </span>
                         </div>
                     </div>
                     <div className="flex justify-between">
                         <div className="flex items-center gap-1">
                             <MdBathroom className="text-lg" />
-                            <span>{bathrooms} {bathrooms === 1 ? 'Bath' : 'Baths'}</span>
+                            <span>
+                                {n_bathrooms}{" "}
+                                {n_bathrooms === 1 ? "Bath" : "Baths"}
+                            </span>
                         </div>
                         <div className="flex items-center gap-1">
                             <TbRulerMeasure className="text-lg" />

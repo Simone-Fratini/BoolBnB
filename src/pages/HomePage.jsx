@@ -2,17 +2,24 @@ import React, { useRef } from "react";
 import CardsSection from "../components/CardsSection";
 import { properties } from "../data/properties";
 import Card from "../components/Card";
+import { useGetPropertiesQuery } from "../hooks/useDataQuery";
 
 function HomePage() {
     const cardSecRef = useRef(null);
 
+    //* QUERIES
+    const { isLoading, isError, data } = useGetPropertiesQuery();
+    
+    //* RETURNS
+    if (isLoading) return <div>Loading...</div>;
+    if (isError) return <pre>Error</pre>;
     return (
         <>
             <Jumbotron cardSecRef={cardSecRef} />
 
             <SearchAndFilterSection />
             <CardsSection cardSecRef={cardSecRef} title={""}>
-                {properties.map((prop) => (
+                {data?.map((prop) => (
                     <Card key={prop.id} property={prop} />
                 ))}
             </CardsSection>
@@ -31,7 +38,6 @@ function SearchAndFilterSection() {
                 qui ci va la sezione dei filtri
             </div>
         </>
-
     );
 }
 
