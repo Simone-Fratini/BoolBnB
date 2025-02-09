@@ -14,6 +14,7 @@ function Card({ property }) {
         title,
         host,
         address,
+        square_meters,
         city,
         n_bedrooms,
         n_bathrooms,
@@ -94,7 +95,7 @@ function Card({ property }) {
                         </div>
                         <div className="flex items-center gap-1">
                             <TbRulerMeasure className="text-lg" />
-                            <span>120 m²</span>
+                            <span>{square_meters} m²</span>
                         </div>
                     </div>
                 </div>
