@@ -1,10 +1,6 @@
 import axios from "axios";
 import { createContext, useState, useEffect } from "react";
-import {
-    baseUrl,
-    propsEndpoint,
-    revsEndpoint,
-} from "../globals/apiUrls";
+import { baseUrl, propsEndpoint, revsEndpoint } from "../globals/apiUrls";
 
 const GlobalContext = createContext();
 
@@ -48,6 +44,15 @@ const GlobalProvider = ({ children }) => {
     getProperties();
   }, []);
 
+  const addProperty = (newProperty) => {
+    axios
+      .post(baseUrl + propsEndpoint, newProperty)
+      .then((res) => {
+        setProperties([...properties, res.data]);
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -58,6 +63,7 @@ const GlobalProvider = ({ children }) => {
         addReview,
         liked,
         toggleLike,
+        addProperty,
       }}
     >
       {children}
