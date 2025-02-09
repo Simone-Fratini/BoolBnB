@@ -6,8 +6,6 @@ import { useGetPropertiesQuery } from "../hooks/useDataQuery";
 import { Link } from "react-router-dom";
 
 function HomePage() {
-    const cardSecRef = useRef(null);
-
     //* QUERIES
     const { isLoading, isError, data } = useGetPropertiesQuery();
 
@@ -16,10 +14,10 @@ function HomePage() {
     if (isError) return <pre>Error</pre>;
     return (
         <>
-            <Jumbotron cardSecRef={cardSecRef} />
+            <Jumbotron />
 
             <SearchAndFilterSection />
-            <CardsSection cardSecRef={cardSecRef} title={""}>
+            <CardsSection title={""}>
                 {data?.map((prop) => (
                     <Card key={prop.id} property={prop} />
                 ))}
@@ -34,12 +32,12 @@ function SearchBarMobile() {
 
 function SearchAndFilterSection() {
     const filters = [
-        'baita',
-        'villaschiera',
-        'indipendente',
-        'villa',
-        'appartment',
-        'chalet'
+        "baita",
+        "villaschiera",
+        "indipendente",
+        "villa",
+        "appartment",
+        "chalet",
     ];
 
     return (
@@ -48,9 +46,12 @@ function SearchAndFilterSection() {
                 <div className="overflow-x-auto">
                     <div className="flex gap-10 min-w-max px-2 [&>div]:w-[40px]">
                         {filters.map((filter) => (
-                            <div key={filter} className="flex flex-col items-center gap-2">
-                                <img 
-                                    src={`/filter_imgs/${filter}.png`} 
+                            <div
+                                key={filter}
+                                className="flex flex-col items-center gap-2"
+                            >
+                                <img
+                                    src={`/filter_imgs/${filter}.png`}
                                     alt={filter}
                                     className="w-6 h-6 opacity-50"
                                 />
@@ -66,13 +67,16 @@ function SearchAndFilterSection() {
     );
 }
 
-function Jumbotron({ cardSecRef }) {
+function Jumbotron() {
+    const jumboRef = useRef(null);
+
     const handleExploreClick = () => {
-        cardSecRef.current.scrollIntoView({ behavior: "smooth" });
+        const jumboHeight = jumboRef?.current?.offsetHeight;
+        window.scrollTo({ top: jumboHeight + 70, behavior: "smooth" });
     };
 
     return (
-        <section className="h-[77vh] relative z-20 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2">
+        <section ref={jumboRef} className="h-[85vh] relative z-20 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2">
             <div className=" flex flex-col gap-8 items-start">
                 <div
                     style={{ fontFamily: `"Noto Sans", serif` }}
