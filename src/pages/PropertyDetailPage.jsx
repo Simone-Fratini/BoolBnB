@@ -5,6 +5,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { GiFamilyHouse } from "react-icons/gi";
 import { MdOutlineLocationCity } from "react-icons/md";
 import { imagesUrl } from "../globals/apiUrls";
+import PaginaContact from "../components/PaginaContact";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
