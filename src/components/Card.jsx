@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { FaHeart } from "react-icons/fa";
 import { MdLocationOn, MdBed, MdBathroom } from "react-icons/md";
 import { TbRulerMeasure } from "react-icons/tb";
 import Slider from "react-slick";
@@ -54,8 +54,8 @@ function Card({ property }) {
                     </div>
                 )}
                 {/* hearth */}
-                <button className="absolute top-3 right-3 p-2 hover:opacity-80 transition-opacity z-10">
-                    <IoMdHeartEmpty className="text-2xl text-white drop-shadow-lg" />
+                <button className="absolute top-3 right-3 p-2 transition-opacity z-10">
+                    <FaHeart className="text-2xl hover:text-red-500 text-white opacity-70 drop-shadow-lg hover:cursor-pointer" />
                 </button>
             </div>
             {/* location and rating */}
