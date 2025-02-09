@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { IoIosStarOutline, IoMdHeartEmpty, IoMdSearch, IoMdAddCircleOutline } from "react-icons/io";
 import { AiFillHome } from "react-icons/ai";
 import { NavLink, Link } from "react-router-dom";
@@ -6,6 +7,7 @@ import { NavLink, Link } from "react-router-dom";
 
 
 const Header = () => {
+
     return (
         <>
             <header className="hidden sm:flex bg-cyan-900 text-center p-5 justify-between sticky top-[-1px] z-30 text-white text-sm">

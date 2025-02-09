@@ -1,23 +1,24 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useParams } from "react-router-dom";
+import { FaHouse } from "react-icons/fa6";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { GiFamilyHouse } from "react-icons/gi";
+import { MdOutlineLocationCity } from "react-icons/md";
 import axios from "axios";
 import { GlobalContext } from "../Context/GlobalContext";
+import { baseUrl, propsEndpoint, imagesUrl } from "../globals/apiUrls";
 
-const myUrl = "http://localhost:3000";
-const propertiesEndPoint = "/properties";
-const reviewsEndPoint = "/reviews";
 
 function PropertyDetail() {
-  const { id } = useParams(); // Ottieni l'ID dalla URL
+  const { id } = useParams();
   const { getReviews, reviews, addReview, liked, toggleLike } =
     useContext(GlobalContext);
   const [selectedProperty, setSelectedProperty] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0); // Indice dell'immagine principale
 
   useEffect(() => {
     axios
-      .get(`${myUrl}${propertiesEndPoint}/${id}`)
+      .get(`${baseUrl}${propsEndpoint}/${id}`)
       .then((res) => {
         setSelectedProperty(res.data);
         getReviews(id);
@@ -25,7 +26,11 @@ function PropertyDetail() {
       .catch((error) => {
         console.error("Errore nel recupero della proprietà", error);
       });
-  }, [id, getReviews]);
+  }, []);
+
+  const handleThumbnailClick = (index) => {
+    setActiveIndex(index);
+  };
 
   if (!selectedProperty) {
     return <div>Loading...</div>;
@@ -36,14 +41,38 @@ function PropertyDetail() {
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4">
         {selectedProperty.title}
       </h1>
-      <img
-        src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cm9vbXxlbnwwfHwwfHx8MA%3D%3D"
-        alt=""
-        className="w-full h-auto rounded-lg mb-4"
-      />
+
+      <div className="flex flex-col sm:flex-row sm:space-x-4">
+        <div className="flex-1 mb-4 sm:mb-0">
+          <img
+            src={`${imagesUrl}/${selectedProperty.id}${selectedProperty.img_endpoints[activeIndex]}`}
+            alt={`Property Image ${activeIndex + 1}`}
+            className="w-full h-80 rounded-lg object-cover"
+          />
+        </div>
+
+        <div className="flex flex-row sm:flex-col justify-between space-x-2 sm:space-x-0 sm:space-y-2 sm:ml-4 max-h-90 overflow-auto">
+          {selectedProperty.img_endpoints.map((img, index) => (
+            <img
+              key={index}
+              src={`${imagesUrl}/${selectedProperty.id}${img}`}
+              alt={`Thumbnail ${index + 1}`}
+              className={`w-20 h-20 rounded-lg cursor-pointer transition-transform transform hover:scale-105 ${
+                activeIndex === index ? "border-2 border-blue-500" : ""
+              }`}
+              onClick={() => handleThumbnailClick(index)}
+            />
+          ))}
+        </div>
+      </div>
+
       <p className="text-sm sm:text-base md:text-lg mb-4">
         {selectedProperty.description}
+        <button onClick={toggleLike} className="text-sm text-black">
+          {liked ? "❤️ Liked" : "🤍 Like"}
+        </button>
       </p>
+
       <div className="flex space-x-4 border-b-2 pb-4 mb-4">
         <p className="text-sm sm:text-base">
           {selectedProperty.n_bedrooms} camere da letto
@@ -55,51 +84,27 @@ function PropertyDetail() {
       </div>
 
       <div className="mb-4">
-        <Menu as="div" className="relative inline-block text-left">
-          <div>
-            <MenuButton className="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50">
-              Mostra tutti i servizi
-              <ChevronDownIcon
-                aria-hidden="true"
-                className="-mr-1 h-5 w-5 text-gray-400"
-              />
-            </MenuButton>
-          </div>
-          <MenuItems className="absolute left-20 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-none">
-            <div className="py-1">
-              <MenuItem>
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700">
-                  <p>Superficie: {selectedProperty.square_meters} m²</p>
-                </a>
-              </MenuItem>
-              <MenuItem>
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700">
-                  <p>Indirizzo: {selectedProperty.address}</p>
-                </a>
-              </MenuItem>
-              <MenuItem>
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700">
-                  <p>Numero civico: {selectedProperty.address_number}</p>
-                </a>
-              </MenuItem>
-              <MenuItem>
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700">
-                  <p>Città: {selectedProperty.city}</p>
-                </a>
-              </MenuItem>
-              <MenuItem>
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700">
-                  <p>Tipo di proprietà: {selectedProperty.property_type}</p>
-                </a>
-              </MenuItem>
-            </div>
-          </MenuItems>
-        </Menu>
+        <p className="flex items-center gap-2">
+          <FaHouse />
+          Superficie: {selectedProperty.square_meters} m²
+        </p>
+        <p className="flex items-center gap-2">
+          <MdOutlineLocationCity />
+          Città: {selectedProperty.city}
+        </p>
+        <p className="flex items-center gap-2">
+          <FaMapMarkerAlt />
+          Indirizzo: {selectedProperty.address}
+        </p>
+        <p className="flex items-center gap-2">
+          <FaMapMarkerAlt />
+          Numero civico: {selectedProperty.address_number}
+        </p>
+        <p className="flex items-center gap-2">
+          <GiFamilyHouse />
+          Tipo di proprietà: {selectedProperty.property_type}
+        </p>
       </div>
-
-      <button onClick={toggleLike} className="text-sm text-blue-500">
-        {liked ? "❤️ Liked" : "🤍 Like"}
-      </button>
 
       <div className="reviews-section mt-6">
         <h3 className="text-xl font-semibold mb-4">Recensioni</h3>
@@ -121,9 +126,9 @@ function PropertyDetail() {
         />
         <button
           onClick={() => addReview(id, "Nuovo testo recensione")}
-          className="mt-2 p-2 bg-blue-500 text-white rounded-lg"
+          className="mt-2 p-2 mb-20 bg-teal-700 text-white rounded-lg"
         >
-          Submit Review"
+          Invia recensione
         </button>
       </div>
     </div>
