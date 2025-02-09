@@ -13,7 +13,8 @@ function Card({ property }) {
         id,
         title,
         host,
-        location,
+        address,
+        city,
         n_bedrooms,
         n_bathrooms,
         rating,
@@ -72,10 +73,11 @@ function Card({ property }) {
                     <div className="flex justify-between">
                         <div className="flex items-center gap-1">
                             <MdLocationOn className="text-lg" />
-                            <span>{location}</span>
+                            <span>{`${address}, ${city}`}</span>
                         </div>
                         <div className="flex items-center gap-1">
                             <MdBed className="text-lg" />
+
                             <span>
                                 {n_bedrooms}{" "}
                                 {n_bedrooms === 1 ? "Room" : "Rooms"}
