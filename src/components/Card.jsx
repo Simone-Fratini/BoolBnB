@@ -15,6 +15,7 @@ function Card({ property }) {
         host,
         address,
         square_meters,
+        total_likes,
         city,
         n_bedrooms,
         n_bathrooms,
@@ -64,7 +65,7 @@ function Card({ property }) {
                     <span className="font-medium">{title}</span>
                     <span className="flex items-center gap-1">
                         <AiFillStar className="text-sm" />
-                        {rating}
+                        {total_likes}
                     </span>
                 </div>
                 <span className="text-gray-500 text-sm px-1">Host: {host}</span>
