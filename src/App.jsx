@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
+// ! NON USARE GlobalProvider => GUARDARE cartella hooks
 function App() {
     return (
         <QueryClientProvider client={queryClient}>
