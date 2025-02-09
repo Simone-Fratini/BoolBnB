@@ -1,9 +1,11 @@
 import { address } from "motion/react-client";
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { CgDanger } from "react-icons/cg";
+import { GlobalContext } from "../Context/GlobalContext";
 
 function AddPropertyPage() {
-  /* const { AddProperty } = useContext(); */
+  const { AddProperty } = useContext(GlobalContext);
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
@@ -12,7 +14,7 @@ function AddPropertyPage() {
     rooms: "",
     bathrooms: "",
     beds: "",
-    sqereMeters: "",
+    squareMeters: "",
     pricePerNight: "",
   });
   const handleInputChange = (event) => {
@@ -21,9 +23,56 @@ function AddPropertyPage() {
       [event.target.name]: event.target.value,
     });
   };
+
+  const validateForm = () => {
+    let newErrors = {};
+    const requiredFields = [
+      "title",
+      "address",
+      "city",
+      "squareMeters",
+      "pricePerNight",
+      "rooms",
+      "beds",
+      "bathrooms",
+    ];
+
+    requiredFields.forEach((field) => {
+      if (!formData[field]?.trim()) {
+        newErrors[field] = (
+          <span className="flex items-center gap-1 text-red-500">
+            <CgDanger /> Required
+          </span>
+        );
+      }
+    });
+
+    if (formData.title && formData.title.length < 10) {
+      newErrors.title = (
+        <span className="flex items-center gap-1 text-red-500">
+          <CgDanger /> Title must be at least 10 characters
+        </span>
+      );
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const [errors, setErrors] = useState({});
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (validateForm()) {
+      AddProperty(formData);
+      console.log("Form data inviato:", formData);
+    } else {
+      console.log("Form data non inviato:", formData);
+    }
   };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -90,135 +139,203 @@ function AddPropertyPage() {
 
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-400 bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-xl w-96 relative animate-fade-in">
+          <div className="bg-white p-6 rounded-lg shadow-xl w-[600px] relative animate-fade-in">
             <button
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
               onClick={() => setIsOpen(false)}
             >
               ✖️
             </button>
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
-              add your property
+            <h2 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              Add Your Property
             </h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label className="block text-gray-700">Title</label>
-                <input
-                  type="text"
-                  className="w-full p-2 border rounded"
-                  placeholder="Es: Perfect house in Milan"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                  name="title"
-                />
+            <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+              {/*parte sinistra */}
+              <div className="flex flex-col gap-3">
+                <div>
+                  <label className="text-gray-700 flex justify-between">
+                    Title
+                    {errors.title && (
+                      <span className="text-red-500">{errors.title}</span>
+                    )}
+                  </label>
+                  <input
+                    type="text"
+                    className={`w-full p-2 border rounded ${
+                      errors.title ? "border-red-500" : "border-gray-300"
+                    }`}
+                    placeholder="Es: Perfect house in Milan"
+                    value={formData.title}
+                    onChange={handleInputChange}
+                    name="title"
+                  />
+                </div>
+                <div>
+                  <label className=" text-gray-700 flex justify-between">
+                    Address
+                    {errors.address && (
+                      <span className="text-red-500">{errors.address}</span>
+                    )}
+                  </label>
+                  <input
+                    type="text"
+                    className={`w-full p-2 border rounded ${
+                      errors.address ? "border-red-500" : "border-gray-300"
+                    }`}
+                    placeholder="Es: Via Roma 10"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <label className="flex justify-between text-gray-700">
+                    City
+                    {errors.city && (
+                      <span className="text-red-500">{errors.city}</span>
+                    )}
+                  </label>
+                  <input
+                    type="text"
+                    className={`w-full p-2 border rounded ${
+                      errors.city ? "border-red-500" : "border-gray-300"
+                    }`}
+                    placeholder="Es: Milano"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <label className="flex justify-between text-gray-700">
+                    Square Meters
+                    {errors.squareMeters && (
+                      <span className="text-red-500">
+                        {errors.squareMeters}
+                      </span>
+                    )}
+                  </label>
+                  <input
+                    type="number"
+                    className={`w-full p-2 border rounded ${
+                      errors.squareMeters ? "border-red-500" : "border-gray-300"
+                    }`}
+                    placeholder="Es: 40"
+                    name="squareMeters"
+                    value={formData.squareMeters}
+                    onChange={handleInputChange}
+                    min={0}
+                  />
+                </div>
               </div>
-              <div className="mb-3">
-                <label className="block text-gray-700">Address</label>
-                <input
-                  type="text"
-                  className="w-full p-2 border rounded"
-                  placeholder="Es: Via Roma 10"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                />
+
+              {/* destra */}
+              <div className="flex flex-col gap-3">
+                <div>
+                  <label className="flex justify-between text-gray-700">
+                    Price per Night (€)
+                    {errors.pricePerNight && (
+                      <span className="text-red-500">
+                        {errors.pricePerNight}
+                      </span>
+                    )}
+                  </label>
+                  <input
+                    type="number"
+                    className={`w-full p-2 border rounded ${
+                      errors.pricePerNight
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    }`}
+                    placeholder="Es: 100"
+                    name="pricePerNight"
+                    value={formData.pricePerNight}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <label className="flex justify-between text-gray-700">
+                    Number of Rooms
+                    {errors.beds && (
+                      <span className="text-red-500">{errors.beds}</span>
+                    )}
+                  </label>
+                  <select
+                    className={`w-full p-2 border rounded ${
+                      errors.rooms ? "border-red-500" : "border-gray-300"
+                    }`}
+                    name="rooms"
+                    value={formData.rooms}
+                    onChange={handleInputChange}
+                  >
+                    <option value="" disabled hidden>
+                      Select the number of rooms
+                    </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5+</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="flex justify-between text-gray-700">
+                    Number of Bathrooms
+                    {errors.bathrooms && (
+                      <span className="text-red-500">{errors.bathrooms}</span>
+                    )}
+                  </label>
+                  <select
+                    className={`w-full p-2 border rounded ${
+                      errors.bathrooms ? "border-red-500" : "border-gray-300"
+                    }`}
+                    name="bathrooms"
+                    value={formData.bathrooms}
+                    onChange={handleInputChange}
+                  >
+                    <option value="" disabled hidden>
+                      Select the number of bathrooms
+                    </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="flex justify-between text-gray-700">
+                    Number of Beds
+                    {errors.beds && (
+                      <span className="text-red-500">{errors.beds}</span>
+                    )}
+                  </label>
+                  <select
+                    className={`w-full p-2 border rounded ${
+                      errors.beds ? "border-red-500" : "border-gray-300"
+                    }`}
+                    name="beds"
+                    value={formData.beds}
+                    onChange={handleInputChange}
+                  >
+                    <option value="" disabled hidden>
+                      Select the number of beds
+                    </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5+</option>
+                  </select>
+                </div>
               </div>
-              <div className="mb-3">
-                <label className="block text-gray-700">City</label>
-                <input
-                  type="text"
-                  className="w-full p-2 border rounded"
-                  placeholder="Es: Milano"
-                  name="city"
-                  onChange={handleInputChange}
-                  value={formData.city}
-                />
-              </div>
-              <div className="mb-3">
-                <label className="block text-gray-700">Numero di stanze</label>
-                <select
-                  className="w-full p-2 border rounded"
-                  name="rooms"
-                  value={formData.rooms}
-                  onChange={handleInputChange}
+
+              <div className="col-span-2">
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg mt-3 transition"
                 >
-                  <option value="" disabled hidden>
-                    Select the number of rooms
-                  </option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5+</option>
-                  onChange={handleInputChange}
-                </select>
+                  📌 Add Your Property
+                </button>
               </div>
-              <div className="mb-3">
-                <label className="block text-gray-700">
-                  Number of bathrooms
-                </label>
-                <select
-                  className="w-full p-2 border rounded"
-                  name="bathrooms"
-                  value={formData.bathrooms}
-                  onChange={handleInputChange}
-                >
-                  <option value="" disabled hidden>
-                    Select the number of bathrooms
-                  </option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
-              </div>
-              <div className="mb-3">
-                <label className="block text-gray-700">Number of beds</label>
-                <select
-                  className="w-full p-2 border rounded"
-                  name="beds"
-                  value={formData.beds}
-                  onChange={handleInputChange}
-                >
-                  <option value="" disabled hidden>
-                    Select the number of beds
-                  </option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5+</option>
-                </select>
-              </div>
-              <div className="mb-3">
-                <label className="block text-gray-700">square meters</label>
-                <input
-                  type="number"
-                  className="w-full p-2 border rounded"
-                  placeholder="Es: 40"
-                  name="squareMeters"
-                  value={formData.squareMeters}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="mb-3">
-                <label className="block text-gray-700">
-                  Priece per night (€)
-                </label>
-                <input
-                  type="number"
-                  className="w-full p-2 border rounded"
-                  placeholder="Es: 100"
-                  name="pricePerNight"
-                  value={formData.pricePerNight}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg mt-3 transition"
-              >
-                📌 Add your property
-              </button>
             </form>
           </div>
         </div>
