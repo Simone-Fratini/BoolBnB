@@ -3,7 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 body {
-    @apply bg-[#fcfcfc] dark:bg-black;
+    @apply bg-[#fcfcfc] dark:bg-black overflow-x-hidden;
 }
 
 /* Stili per i dots */

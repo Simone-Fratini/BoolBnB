@@ -3,13 +3,14 @@ import CardsSection from "../components/CardsSection";
 import { properties } from "../data/properties";
 import Card from "../components/Card";
 import { useGetPropertiesQuery } from "../hooks/useDataQuery";
+import { Link } from "react-router-dom";
 
 function HomePage() {
     const cardSecRef = useRef(null);
 
     //* QUERIES
     const { isLoading, isError, data } = useGetPropertiesQuery();
-    
+
     //* RETURNS
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <pre>Error</pre>;
@@ -34,7 +35,7 @@ function SearchBarMobile() {
 function SearchAndFilterSection() {
     return (
         <>
-            <div className="border-b p-4 bg-white w-screen border-gray-300 sticky top-0 z-30">
+            <div className="border-b p-4 bg-white w-screen border-gray-300 sticky left-0 top-0 md:top-19 z-30">
                 qui ci va la sezione dei filtri
             </div>
         </>
@@ -47,40 +48,62 @@ function Jumbotron({ cardSecRef }) {
     };
 
     return (
-        <section className="h-[75vh] relative z-20 bg-gradient-to-br from-black to-cyan-950 text-white text-center flex flex-col gap-8 justify-center items-center p-6">
-            <div
-                style={{ fontFamily: `"Noto Sans", serif` }}
-                className="flex flex-col gap-4"
-            >
-                <p className="text-3xl tracking-widest font-black">
-                    Your Dream Getaway Awaits
-                </p>
-                <p className="font-black tracking-wider">
-                    From cozy cottages to luxurious villas, discover the ideal
-                    space for your next adventure
-                </p>
+        <section className="h-[75vh] relative z-20 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2">
+            <div className=" flex flex-col gap-8 items-start">
+                <div
+                    style={{ fontFamily: `"Noto Sans", serif` }}
+                    className="flex flex-col gap-4"
+                >
+                    <p className="text-4xl lg:text-6xl tracking-wide font-black">
+                        Your Dream Getaway Awaits
+                    </p>
+                    <p className="font-black tracking-wide lg:text-2xl">
+                        From cozy cottages to luxurious villas, discover the
+                        ideal space for your next adventure
+                    </p>
+                </div>
+                <div
+                    style={{ fontFamily: `"Noto Sans", serif` }}
+                    className="flex flex-col rounded-lg p-4 text-sm gap-4 shadow-lg "
+                >
+                    <div className="font-semibold lg:font-light lg:text-base">
+                        <span>
+                            <span className="underline underline-offset-2">
+                                Already Know
+                            </span>{" "}
+                            What You're Looking For? <br />
+                            Your{" "}
+                            <strong className="font-semibold">
+                                Dream
+                            </strong>{" "}
+                            Stay is Just{" "}
+                            <strong className="font-semibold">
+                                One Click Away
+                            </strong>
+                            !
+                        </span>
+                    </div>
+                    <div className="flex gap-4 whitespace-nowrap text-lg font-semibold tracking-wider lg:tracking-normal">
+                        <Link
+                            to={"search"}
+                            className="text-center bg-[#d4c685] py-4 rounded-md w-2/3 border-2 border-stone-500 hover:bg-[#cabc7d] cursor-pointer"
+                        >
+                            Book Now!
+                        </Link>
+                        <button
+                            onClick={handleExploreClick}
+                            className="bg-[#fefae0] hover:bg-[#faedcd] px-4 py-2 rounded-md scroll-mt-[-600px] cursor-pointer"
+                        >
+                            Explore
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div
-                style={{ fontFamily: `"Noto Sans", serif` }}
-                className="flex flex-col rounded-lg p-4 text-sm gap-4 bg-gradient-to-tl border border-stone-900 from-black/95 to-cyan-950"
-            >
-                <div className="font-semibold tracking-wider">
-                    <span>
-                        Already Know What You're Looking For? <br />
-                        Your Dream Stay is Just One Click Away!
-                    </span>
-                </div>
-                <div className="flex gap-4 whitespace-nowrap text-lg font-semibold tracking-wider">
-                    <button className="bg-black py-4 rounded-md w-2/3 border border-slate-300">
-                        Book Now!
-                    </button>
-                    <button
-                        onClick={handleExploreClick}
-                        className="bg-blue-950 px-4 py-2 rounded-md scroll-mt-[-600px]"
-                    >
-                        Explore
-                    </button>
-                </div>
+            <div className="hidden lg:block h-full relative -translate-y-2">
+                <div className="absolute bg-amber-700 w-65 aspect-square -rotate-4 -translate-y-4 rounded-lg"></div>
+                <div className="absolute bg-amber-500 w-70 aspect-square rotate-10 -translate-x-4 right-0 rounded-lg"></div>
+                <div className="absolute bg-amber-600 w-75 aspect-square -rotate-7 translate-y-3 -translate-x-6 bottom-0 rounded-lg"></div>
+                <div className="absolute bg-amber-800 w-77 aspect-square rotate-2 translate-y-9 -translate-x-3 bottom-0 right-0 rounded-lg"></div>
             </div>
         </section>
     );

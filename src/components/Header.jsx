@@ -10,7 +10,7 @@ const Header = () => {
 
     return (
         <>
-            <header className="hidden sm:flex bg-cyan-900 text-center p-5 justify-between sticky top-[-1px] z-30 text-white text-sm">
+            <header className="hidden sm:flex bg-linear-90/oklch drop-shadow-lg from-[#d4c685] to-[#a7d3a6] text-center p-5 lg:px-8 justify-between sticky top-[-1px] z-30 text-stone-800 text-sm">
                 <Link to="/">
                     <img
                         src="/bed-and-breakfast.png"
@@ -26,17 +26,25 @@ const Header = () => {
 
             {/* navbar mobile*/}
             <nav className="bg-[#fcfcfc] bottom-[-1px] w-screen py-3 border-t-2 rounded-2xl border-t-stone-300 z-30 fixed grid grid-cols-3 md:hidden">
-                <NavLink to="/search" className="flex justify-center items-center  flex-col">
+                <NavLink
+                    to="/search"
+                    className="flex justify-center items-center  flex-col"
+                >
                     <IoMdSearch className="text-2xl" />
                     <span className="capitalize text-sm">explore</span>
                 </NavLink>
-                <NavLink to="/" className="flex justify-center items-center  flex-col">
+                <NavLink
+                    to="/"
+                    className="flex justify-center items-center  flex-col"
+                >
                     <AiFillHome className="text-2xl" />
 
                     <span className="capitalize text-sm">Home</span>
-                
                 </NavLink>
-                <NavLink to="/addproperty" className="flex justify-center items-center  flex-col">
+                <NavLink
+                    to="/addproperty"
+                    className="flex justify-center items-center  flex-col"
+                >
                     <IoMdAddCircleOutline className="text-2xl" />
                     <span className="capitalize text-sm">add property</span>
                 </NavLink>
