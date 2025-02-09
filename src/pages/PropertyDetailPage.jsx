@@ -4,31 +4,14 @@ import { FaHouse } from "react-icons/fa6";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { GiFamilyHouse } from "react-icons/gi";
 import { MdOutlineLocationCity } from "react-icons/md";
-// import { imagesUrl } from "../globals/apiUrls";
-// import React, { Component } from "react";
-// import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
+import { imagesUrl } from "../globals/apiUrls";
+
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+
 import { useGetPropertyQuery, useGetReviewsQuery } from "../hooks/useDataQuery";
 
 function PropertyDetail() {
-  // class SimpleMap extends Component {
-  //   render() {
-  //     return (
-  //       <LeafletMap
-  //         center={[60, 10]}
-  //         zoom={6}
-  //         maxZoom={10}
-  //         attributionControl={true}
-  //         zoomControl={true}
-  //       >
-  //         <TileLayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
-  //         <Marker position={[60, 10]}>
-  //           <Popup>Popup for any custom information.</Popup>
-  //         </Marker>
-  //       </LeafletMap>
-  //     );
-  //   }
-  // }
-
   const { id } = useParams();
   const [isLiked, setIsLiked] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0); // Indice dell'immagine principale
@@ -130,6 +113,61 @@ function PropertyDetail() {
           <GiFamilyHouse />
           Tipo di proprietà: {property.property_type}
         </p>
+        <div>
+          <MapContainer
+            center={
+              property.city === "Roma"
+                ? [41.9028, 12.4964] // Roma
+                : property.city === "Milano"
+                ? [45.4642, 9.19] // Milano
+                : property.city === "Palermo"
+                ? [38.1157, 13.3615] // Palermo
+                : property.city === "Bologna"
+                ? [44.4949, 11.3426] // Bologna
+                : property.city === "Cortina d'Ampezzo"
+                ? [46.5386, 12.1358] // Cortina d'Ampezzo
+                : property.city === "Trento"
+                ? [46.0704, 11.121] // Trento
+                : property.city === "Firenze"
+                ? [43.7696, 11.2558] // Firenze
+                : property.city === "Torino"
+                ? [45.0703, 7.6869] // Torino
+                : [41.9028, 12.4964] // Default (Roma)
+            }
+            zoom={13}
+            style={{ height: "500px", width: "100%" }}
+          >
+            {/* Layer di OpenStreetMap */}
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+            {/* Marker */}
+            <Marker
+              position={
+                property.city === "Roma"
+                  ? [41.9028, 12.4964]
+                  : property.city === "Milano"
+                  ? [45.4642, 9.19]
+                  : property.city === "Palermo"
+                  ? [38.1157, 13.3615]
+                  : property.city === "Bologna"
+                  ? [44.4949, 11.3426]
+                  : property.city === "Cortina d'Ampezzo"
+                  ? [46.5386, 12.1358]
+                  : property.city === "Trento"
+                  ? [46.0704, 11.121]
+                  : property.city === "Firenze"
+                  ? [43.7696, 11.2558]
+                  : property.city === "Torino"
+                  ? [45.0703, 7.6869]
+                  : [41.9028, 12.4964] // Default (Roma)
+              }
+            >
+              <Popup>
+                Benvenuto a {property.city ? property.city : "Roma"}! 🇮🇹
+              </Popup>
+            </Marker>
+          </MapContainer>
+        </div>
       </section>
       <section className="border-1 rounded-[3vw]  flex max-w-96 m-auto justify-center  p-2 gap-5">
         <div className="flex justify-between">

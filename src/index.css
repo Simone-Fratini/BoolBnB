@@ -49,9 +49,3 @@ body {
 .slick-next:hover:before {
   opacity: 1;
 }
-
-/* Map details Page container  */
-.leaflet-container {
-  height: 400px;
-  width: 400px;
-}
