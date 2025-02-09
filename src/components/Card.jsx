@@ -19,7 +19,6 @@ function Card({ property }) {
         city,
         n_bedrooms,
         n_bathrooms,
-        rating,
         img_endpoints,
     } = property;
     const settings = {
@@ -32,6 +31,7 @@ function Card({ property }) {
         autoplay: false,
         className: "slides-container",
     };
+    console.log(property);
 
     return (
         <div className="group cursor-pointer">
