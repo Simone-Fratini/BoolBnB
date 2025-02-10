@@ -137,7 +137,7 @@ function Jumbotron() {
                 whileHover="hover"
             >
                 <motion.div 
-                    className="absolute lg:w-40 xl:w-45 2xl:w-50 rounded-lg z-10"
+                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-10"
                     initial={{ rotate: -10, top: "20%", left: "23%" }}
 
                     variants={{
@@ -153,7 +153,7 @@ function Jumbotron() {
                 </motion.div>
 
                 <motion.div 
-                    className="absolute lg:w-40 xl:w-45 2xl:w-50 rounded-lg z-20"
+                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-20"
                     initial={{ rotate: 3, top: "20%", right: "20%" }}
                     variants={{
                         hover: { 
@@ -168,7 +168,7 @@ function Jumbotron() {
                 </motion.div>
 
                 <motion.div 
-                    className="absolute lg:w-40 xl:w-45 2xl:w-50 rounded-lg z-30"
+                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-30"
                     initial={{ rotate: -7, bottom: "10%", left: "20%" }}
                     variants={{
                         hover: { 
@@ -183,7 +183,7 @@ function Jumbotron() {
                 </motion.div>
 
                 <motion.div 
-                    className="absolute lg:w-40 xl:w-45 2xl:w-50 rounded-lg z-40"
+                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-40"
                     initial={{ rotate: 8, bottom: "10%", right: "20%" }}
                     variants={{
                         hover: { 
