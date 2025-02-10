@@ -41,22 +41,6 @@ function PropertyDetail() {
             [name]: value,
         });
     }
-    function addReview() {
-        axios
-            .post(`${url}${endPoint}`, {
-                user_id: null,
-                property_id: id,
-                title: formData.userName,
-                description: formData.reviewText,
-            })
-            .then((res) => {
-                console.log("Recensione aggiunta con successo:", res.data);
-                setFormData({ userName: "", reviewText: "" });
-            })
-            .catch((err) => {
-                console.error("Errore nell'invio della recensione:", err);
-            });
-    }
 
     //* ACTIONS
     const handleThumbnailClick = (index) => {

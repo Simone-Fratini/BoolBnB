@@ -11,7 +11,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 function Card({ property }) {
-    const {
+    let {
         id,
         title,
         host,
@@ -23,6 +23,7 @@ function Card({ property }) {
         n_bathrooms,
         img_endpoints,
     } = property;
+    img_endpoints = img_endpoints.reverse()
     const settings = {
         dots: true,
         infinite: true,
@@ -33,7 +34,6 @@ function Card({ property }) {
         autoplay: false,
         className: "slides-container",
     };
-    console.log(property);
 
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
