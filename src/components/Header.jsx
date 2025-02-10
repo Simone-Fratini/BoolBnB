@@ -7,18 +7,25 @@ import {
     IoMdAddCircleOutline,
 } from "react-icons/io";
 import { AiFillHome } from "react-icons/ai";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import useScroll from "../hooks/useScroll";
 
 const Header = () => {
+    const location = useLocation();
+    const [isHidden, setIsHidden] = useState(false);
 
     // bad practice => numero magico: altezza in px della jumbo
-    const isVisible = useScroll(730);
+    const transAnim = useScroll(730);
+
+    useEffect(() => {
+        location.pathname !== "/" ? setIsHidden(true) : setIsHidden(false);
+    }, [location.pathname]);
 
     return (
         <>
             <header
-                className={`${!isVisible && "-translate-y-20"}
+                className={`${!transAnim && "-translate-y-20"}
+                ${isHidden && "hidden"}
                 rounded-b-2xl sm:rounded-b-none
                 sm:!-translate-0 flex bg-linear-90/oklch sm:drop-shadow-lg from-[#d4c685] to-[#a7d3a6] text-center p-5 lg:px-8 justify-between fixed sm:sticky w-screen top-[-1px] z-40 text-stone-800 text-sm transition-all duration-200 ease-in`}
             >
