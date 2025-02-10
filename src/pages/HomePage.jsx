@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import CardsSection from "../components/CardsSection";
 import Card from "../components/Card";
 import { useGetPropertiesQuery } from "../hooks/useDataQuery";
@@ -6,19 +6,26 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 function HomePage() {
-    //* QUERIES
+    const [activeFilter, setActiveFilter] = useState(null);
     const { isLoading, isError, data } = useGetPropertiesQuery();
 
-    //* RETURNS
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <pre>Error</pre>;
+
+    const filteredProperties = !activeFilter 
+        ? data 
+        : data.filter(prop => prop.property_type?.toLowerCase().includes(activeFilter.toLowerCase()));
+
+
     return (
         <>
             <Jumbotron />
-
-            <SearchAndFilterSection />
+            <SearchAndFilterSection 
+                activeFilter={activeFilter}
+                onFilterChange={setActiveFilter}
+            />
             <CardsSection title={""}>
-                {data?.map((prop) => (
+                {filteredProperties?.map((prop) => (
                     <Card key={prop.id} property={prop} />
                 ))}
             </CardsSection>
@@ -30,33 +37,41 @@ function SearchBarMobile() {
     return <div></div>;
 }
 
-function SearchAndFilterSection() {
+function SearchAndFilterSection({ activeFilter, onFilterChange }) {
     const filters = [
         "baita",
-        "villaschiera",
+        "schiera",
         "indipendente",
         "villa",
-        "appartment",
+        "appartamento",
         "chalet",
     ];
 
     return (
-        <>
-            <div className="border-b p-3 bg-white w-screen border-gray-300 md:sticky top-[-1px] sm:top-19 z-20 rounded-b-2xl">
-                <div className="overflow-x-auto">
-                    <div className="flex justify-center gap-10 min-w-max px-2 [&>div]:w-[40px]">
-                        {filters.map((filter) => (
-                            <div key={filter} className="group flex flex-col items-center gap-2 hover:cursor-pointer">
-                                <img src={`/filter_imgs/${filter}.png`} alt={filter} className="w-6 h-6 opacity-50 group-hover:opacity-100 group-hover:text-red-500"/>
-                                <span className="text-xs text-gray-600 group-hover:opacity-100">
-                                    {filter}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
+        <div className="border-b p-3 bg-white w-screen border-gray-300 fixed md:sticky top-[-1px] sm:top-19 z-20 rounded-b-2xl">
+            <div className="overflow-x-auto">
+                <div className="flex justify-center gap-10 min-w-max px-2 [&>div]:w-[40px]">
+                    {filters.map((filter) => (
+                        <div 
+                            key={filter} 
+                            className={`group flex flex-col items-center gap-2 hover:cursor-pointer ${
+                                activeFilter === filter ? 'opacity-100' : 'opacity-50'
+                            }`}
+                            onClick={() => onFilterChange(filter === activeFilter ? null : filter)}
+                        >
+                            <img 
+                                src={`/filter_imgs/${filter}.png`} 
+                                alt={filter} 
+                                className="w-6 h-6 group-hover:opacity-100"
+                            />
+                            <span className="text-xs text-gray-600 group-hover:opacity-100">
+                                {filter}
+                            </span>
+                        </div>
+                    ))}
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
@@ -137,7 +152,7 @@ function Jumbotron() {
                 className="hidden lg:block h-full relative -translate-y-2"
             >
                 <motion.div 
-                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-10 hover:z-50 "
+                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-10"
                     initial={{ rotate: 0, top: "2%", left: "15%" }}
                     animate={{ rotate: -10, top: "20%", left: "23%" }}
                     whileHover={{ rotate: 0, top: "2%", left: "15%" }}
@@ -148,7 +163,7 @@ function Jumbotron() {
                 </motion.div>
 
                 <motion.div 
-                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-20 hover:z-50"
+                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-20"
                     initial={{ rotate: 0, top: "2%", right: "10%" }}
                     animate={{ rotate: 3, top: "20%", right: "20%" }}
                     whileHover={{ rotate: 0, top: "2%", right: "10%" }}
@@ -158,7 +173,7 @@ function Jumbotron() {
                 </motion.div>
 
                 <motion.div 
-                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-30 hover:z-50"
+                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-30"
                     initial={{ rotate: 0, bottom: "1%", left: "15%" }}
                     animate={{ rotate: -7, bottom: "10%", left: "20%" }}
                     whileHover={{ rotate: 0, bottom: "1%", left: "15%" }}
@@ -168,7 +183,7 @@ function Jumbotron() {
                 </motion.div>
 
                 <motion.div 
-                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-40 hover:z-50"
+                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-40"
                     initial={{ rotate: 0, bottom: "1%", right: "10%" }}
                     animate={{ rotate: 8, bottom: "10%", right: "20%" }}
                     whileHover={{ rotate: 0, bottom: "1%", right: "10%" }}
