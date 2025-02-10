@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import { useGetPropertiesQuery } from "../hooks/useDataQuery";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useRefsContext } from "../Context/RefsContext";
 
 function HomePage() {
     const [activeFilter, setActiveFilter] = useState(null);
@@ -76,11 +77,12 @@ function SearchAndFilterSection({ activeFilter, onFilterChange }) {
 }
 
 function Jumbotron() {
-    const jumboRef = useRef(null);
+
+    const {jumboRef, headerRef} = useRefsContext()
 
     const handleExploreClick = () => {
         window.scrollTo({
-            top: jumboRef.current.offsetHeight + 5,
+            top: jumboRef.current.offsetHeight + headerRef.current.offsetHeight,
             behavior: "smooth",
         });
     };
