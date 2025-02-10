@@ -4,6 +4,14 @@ import Card from "../components/Card";
 import { useGetPropertiesQuery } from "../hooks/useDataQuery";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import {
+    sectionVariants,
+    divVariants,
+    hoverVariants,
+    hoverVariantsRight,
+    hoverVariantsBottomLeft,
+    hoverVariantsBottomRight,
+} from "../animations/variants";
 
 function HomePage() {
     //* QUERIES
@@ -46,16 +54,9 @@ function SearchAndFilterSection() {
                 <div className="overflow-x-auto">
                     <div className="flex justify-center gap-10 min-w-max px-2 [&>div]:w-[40px]">
                         {filters.map((filter) => (
-                            <div
-                                key={filter}
-                                className="flex flex-col items-center gap-2"
-                            >
-                                <img
-                                    src={`/filter_imgs/${filter}.png`}
-                                    alt={filter}
-                                    className="w-6 h-6 opacity-50"
-                                />
-                                <span className="text-xs text-gray-600">
+                            <div key={filter} className="group flex flex-col items-center gap-2 hover:cursor-pointer">
+                                <img src={`/filter_imgs/${filter}.png`} alt={filter} className="w-6 h-6 opacity-50 group-hover:opacity-100 group-hover:text-red-500"/>
+                                <span className="text-xs text-gray-600 group-hover:opacity-100">
                                     {filter}
                                 </span>
                             </div>
@@ -78,11 +79,21 @@ function Jumbotron() {
     };
 
     return (
-        <section
+        <motion.section
             ref={jumboRef}
             className="sm:h-[80vh] h-[87vh] relative z-30 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2 rounded-b-4xl"
+            variants={sectionVariants}
+            initial="initial"
+            animate="animate"
+            transition="transition"
         >
-            <div className=" flex flex-col gap-8 items-center sm:items-start">
+            <motion.div
+                className="flex flex-col gap-8 items-center sm:items-start"
+                variants={divVariants}
+                initial="initial"
+                animate="animate"
+                transition="transition"
+            >
                 <div
                     style={{ fontFamily: `"Noto Sans", serif` }}
                     className="flex flex-col gap-4"
@@ -131,7 +142,7 @@ function Jumbotron() {
                         </button>
                     </div>
                 </div>
-            </div>
+            </motion.div>
             <motion.div 
                 className="hidden lg:block h-full relative -translate-y-2"
                 whileHover="hover"
@@ -139,15 +150,7 @@ function Jumbotron() {
                 <motion.div 
                     className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-10"
                     initial={{ rotate: -10, top: "20%", left: "23%" }}
-
-                    variants={{
-                        hover: { 
-                            rotate: 0,
-                            top: "2%",
-                            left: "15%",
-                            transition: { duration: 0.3 }
-                        }
-                    }}
+                    variants={hoverVariants}
                 >
                     <img src="/cardtest2.png" alt="villaschiera" className="w-full h-full object-cover rounded-lg overflow-hidden" />
                 </motion.div>
@@ -155,14 +158,7 @@ function Jumbotron() {
                 <motion.div 
                     className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-20"
                     initial={{ rotate: 3, top: "20%", right: "20%" }}
-                    variants={{
-                        hover: { 
-                            rotate: 0,
-                            top: "2%",
-                            right: "10%",
-                            transition: { duration: 0.3 }
-                        }
-                    }}
+                    variants={hoverVariantsRight}
                 >
                     <img src="/cardtest2.png" alt="villaschiera" className="w-full h-full object-cover rounded-lg overflow-hidden" />
                 </motion.div>
@@ -170,14 +166,7 @@ function Jumbotron() {
                 <motion.div 
                     className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-30"
                     initial={{ rotate: -7, bottom: "10%", left: "20%" }}
-                    variants={{
-                        hover: { 
-                            rotate: 0,
-                            bottom: "1%",
-                            left: "15%",
-                            transition: { duration: 0.3 }
-                        }
-                    }}
+                    variants={hoverVariantsBottomLeft}
                 >
                     <img src="/cardtest2.png" alt="villaschiera" className="w-full h-full object-cover rounded-lg overflow-hidden" />
                 </motion.div>
@@ -185,19 +174,12 @@ function Jumbotron() {
                 <motion.div 
                     className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-40"
                     initial={{ rotate: 8, bottom: "10%", right: "20%" }}
-                    variants={{
-                        hover: { 
-                            rotate: 0,
-                            bottom: "1%",
-                            right: "10%",
-                            transition: { duration: 0.3 }
-                        }
-                    }}
+                    variants={hoverVariantsBottomRight}
                 >
                     <img src="/cardtest2.png" alt="villaschiera" className="w-full h-full object-cover rounded-lg overflow-hidden" />
                 </motion.div>
             </motion.div>
-        </section>
+        </motion.section>
     );
 }
 
