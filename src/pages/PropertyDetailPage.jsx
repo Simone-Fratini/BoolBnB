@@ -15,7 +15,7 @@ import { useGetPropertyQuery, useGetReviewsQuery } from "../hooks/useDataQuery";
 
 function PropertyDetail() {
   const { id } = useParams();
-  const [isLiked, setIsLiked] = useState(false);
+  // const [isLiked, setIsLiked] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0); // Indice dell'immagine principale
   // function  addReview(){
 
