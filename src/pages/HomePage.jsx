@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import CardsSection from "../components/CardsSection";
-import { properties } from "../data/properties";
 import Card from "../components/Card";
 import { useGetPropertiesQuery } from "../hooks/useDataQuery";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function HomePage() {
     //* QUERIES
@@ -42,20 +42,13 @@ function SearchAndFilterSection() {
 
     return (
         <>
-            <div className="border-b p-3 bg-white w-screen border-gray-300 fixed top-0 z-10 rounded-b-2xl">
+            <div className="border-b p-3 bg-white w-screen border-gray-300 fixed top-[-1px] sm:top-19 z-20 rounded-b-2xl">
                 <div className="overflow-x-auto">
-                    <div className="flex gap-10 min-w-max px-2 [&>div]:w-[40px]">
+                    <div className="flex justify-center gap-10 min-w-max px-2 [&>div]:w-[40px]">
                         {filters.map((filter) => (
-                            <div
-                                key={filter}
-                                className="flex flex-col items-center gap-2"
-                            >
-                                <img
-                                    src={`/filter_imgs/${filter}.png`}
-                                    alt={filter}
-                                    className="w-6 h-6 opacity-50"
-                                />
-                                <span className="text-xs text-gray-600">
+                            <div key={filter} className="group flex flex-col items-center gap-2 hover:cursor-pointer">
+                                <img src={`/filter_imgs/${filter}.png`} alt={filter} className="w-6 h-6 opacity-50 group-hover:opacity-100 group-hover:text-red-500"/>
+                                <span className="text-xs text-gray-600 group-hover:opacity-100">
                                     {filter}
                                 </span>
                             </div>
@@ -71,13 +64,26 @@ function Jumbotron() {
     const jumboRef = useRef(null);
 
     const handleExploreClick = () => {
-        const jumboHeight = jumboRef?.current?.offsetHeight;
-        window.scrollTo({ top: jumboHeight + 70, behavior: "smooth" });
+        window.scrollTo({
+            top: jumboRef.current.offsetHeight + 5,
+            behavior: "smooth",
+        });
     };
 
     return (
-        <section ref={jumboRef} className="h-[85vh] relative z-20 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2">
-            <div className=" flex flex-col gap-8 items-start">
+        <motion.section
+            ref={jumboRef}
+            className="sm:h-[80vh] h-[87vh] relative z-30 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2 rounded-b-4xl"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+        >
+            <motion.div
+                className="flex flex-col gap-8 items-center sm:items-start"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+            >
                 <div
                     style={{ fontFamily: `"Noto Sans", serif` }}
                     className="flex flex-col gap-4"
@@ -92,7 +98,7 @@ function Jumbotron() {
                 </div>
                 <div
                     style={{ fontFamily: `"Noto Sans", serif` }}
-                    className="flex flex-col  rounded-lg p-4 text-sm gap-4 shadow-lg "
+                    className="flex flex-col  rounded-lg p-4 text-sm gap-4 shadow-lg"
                 >
                     <div className="font-semibold lg:font-light lg:text-base">
                         <span>
@@ -126,14 +132,52 @@ function Jumbotron() {
                         </button>
                     </div>
                 </div>
-            </div>
-            <div className="hidden lg:block h-full relative -translate-y-2">
-                <div className="absolute bg-amber-700 w-65 aspect-square -rotate-4 -translate-y-4 rounded-lg"></div>
-                <div className="absolute bg-amber-500 w-70 aspect-square rotate-10 -translate-x-4 right-0 rounded-lg"></div>
-                <div className="absolute bg-amber-600 w-75 aspect-square -rotate-7 translate-y-3 -translate-x-6 bottom-0 rounded-lg"></div>
-                <div className="absolute bg-amber-800 w-77 aspect-square rotate-2 translate-y-9 -translate-x-3 bottom-0 right-0 rounded-lg"></div>
-            </div>
-        </section>
+            </motion.div>
+            <motion.div 
+                className="hidden lg:block h-full relative -translate-y-2"
+            >
+                <motion.div 
+                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-10 hover:z-50 "
+                    initial={{ rotate: 0, top: "2%", left: "15%" }}
+                    animate={{ rotate: -10, top: "20%", left: "23%" }}
+                    whileHover={{ rotate: 0, top: "2%", left: "15%" }}
+
+                    transition={{ duration: 0.9 }}
+                >
+                    <img src="/cardtest2.png" alt="villaschiera" className="w-full h-full object-cover rounded-lg overflow-hidden" />
+                </motion.div>
+
+                <motion.div 
+                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-20 hover:z-50"
+                    initial={{ rotate: 0, top: "2%", right: "10%" }}
+                    animate={{ rotate: 3, top: "20%", right: "20%" }}
+                    whileHover={{ rotate: 0, top: "2%", right: "10%" }}
+                    transition={{ duration: 0.9 }}
+                >
+                    <img src="/cardtest2.png" alt="villaschiera" className="w-full h-full object-cover rounded-lg overflow-hidden" />
+                </motion.div>
+
+                <motion.div 
+                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-30 hover:z-50"
+                    initial={{ rotate: 0, bottom: "1%", left: "15%" }}
+                    animate={{ rotate: -7, bottom: "10%", left: "20%" }}
+                    whileHover={{ rotate: 0, bottom: "1%", left: "15%" }}
+                    transition={{ duration: 0.9 }}
+                >
+                    <img src="/cardtest2.png" alt="villaschiera" className="w-full h-full object-cover rounded-lg overflow-hidden" />
+                </motion.div>
+
+                <motion.div 
+                    className="absolute lg:w-40 xl:w-45 2xl:w-60 rounded-lg z-40 hover:z-50"
+                    initial={{ rotate: 0, bottom: "1%", right: "10%" }}
+                    animate={{ rotate: 8, bottom: "10%", right: "20%" }}
+                    whileHover={{ rotate: 0, bottom: "1%", right: "10%" }}
+                    transition={{ duration: 0.9 }}
+                >
+                    <img src="/cardtest2.png" alt="villaschiera" className="w-full h-full object-cover rounded-lg overflow-hidden" />
+                </motion.div>
+            </motion.div>
+        </motion.section>
     );
 }
 
