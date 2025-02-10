@@ -3,6 +3,7 @@ import CardsSection from "../components/CardsSection";
 import Card from "../components/Card";
 import { useGetPropertiesQuery } from "../hooks/useDataQuery";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function HomePage() {
     //* QUERIES
@@ -131,12 +132,71 @@ function Jumbotron() {
                     </div>
                 </div>
             </div>
-            <div className="hidden lg:block h-full relative -translate-y-2">
-                <div className="absolute bg-amber-700 w-65 aspect-square -rotate-4 -translate-y-8 rounded-lg"></div>
-                <div className="absolute bg-amber-500 w-70 aspect-square rotate-10 -translate-x-4 right-0 rounded-lg"></div>
-                <div className="absolute bg-amber-600 w-75 aspect-square -rotate-7 translate-y-3 -translate-x-6 bottom-0 rounded-lg"></div>
-                <div className="absolute bg-amber-800 w-77 aspect-square rotate-2 translate-y-9 -translate-x-3 bottom-0 right-0 rounded-lg"></div>
-            </div>
+            <motion.div 
+                className="hidden lg:block h-full relative -translate-y-2"
+                whileHover="hover"
+            >
+                <motion.div 
+                    className="absolute lg:w-60 md:w-40 rounded-lg z-10"
+                    initial={{ rotate: -10, top: "20%", left: "20%" }}
+
+                    variants={{
+                        hover: { 
+                            rotate: 0,
+                            top: "5%",
+                            left: "15%",
+                            transition: { duration: 0.3 }
+                        }
+                    }}
+                >
+                    <img src="/cardtest2.png" alt="villaschiera" className="w-full h-full object-cover rounded-lg overflow-hidden" />
+                </motion.div>
+
+                <motion.div 
+                    className="absolute w-60 rounded-lg z-20"
+                    initial={{ rotate: 3, top: "20%", right: "20%" }}
+                    variants={{
+                        hover: { 
+                            rotate: 0,
+                            top: "5%",
+                            right: "12%",
+                            transition: { duration: 0.3 }
+                        }
+                    }}
+                >
+                    <img src="/cardtest2.png" alt="villaschiera" className="w-full h-full object-cover rounded-lg overflow-hidden" />
+                </motion.div>
+
+                <motion.div 
+                    className="absolute w-60 rounded-lg z-30"
+                    initial={{ rotate: -7, bottom: "10%", left: "20%" }}
+                    variants={{
+                        hover: { 
+                            rotate: 0,
+                            bottom: "10%",
+                            left: "15%",
+                            transition: { duration: 0.3 }
+                        }
+                    }}
+                >
+                    <img src="/cardtest2.png" alt="villaschiera" className="w-full h-full object-cover rounded-lg overflow-hidden" />
+                </motion.div>
+
+                <motion.div 
+                    className="absolute w-60 rounded-lg z-40"
+                    initial={{ rotate: 8, bottom: "10%", right: "20%" }}
+                    variants={{
+                        hover: { 
+                            rotate: 0,
+                            bottom: "10%",
+                            right: "12%",
+                            transition: { duration: 0.3 }
+                        }
+                    }}
+                >
+                    <img src="/cardtest2.png" alt="villaschiera" className="w-full h-full object-cover rounded-lg overflow-hidden" />
+                </motion.div>
+            </motion.div>
         </section>
     );
 }
