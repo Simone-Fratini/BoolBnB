@@ -32,7 +32,9 @@ function PaginaContact() {
     <div className={style.formCard1}>
       <div className={style.formCard2}>
         <form className={style.form} onSubmit={handleSubmit}>
-          <p className={style.formHeading}>Contattaci</p>
+          <div className="m-auto mt-2  p-2">
+            <p style={{ fontSize: "1.5rem" }}>Contattaci </p>
+          </div>
 
           <div className={style.formField}>
             <input
