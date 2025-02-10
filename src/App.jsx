@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import SearchPropertyPage from "./pages/SearchPropertyPage";
 import AddPropertyPage from "./pages/AddPropertyPage";
 import PropertyDetail from "./pages/PropertyDetailPage";
+import ErrorPage from "./pages/ErrorPage";
 // import { GlobalProvider } from "./Context/GlobalContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -29,6 +30,10 @@ function App() {
                             <Route
                                 path="detail/:id"
                                 Component={PropertyDetail}
+                            />
+                            <Route
+                                path="*"
+                                Component={ErrorPage}
                             />
                         </Route>
                     </Routes>
