@@ -97,7 +97,7 @@ function Jumbotron() {
                 </div>
                 <div
                     style={{ fontFamily: `"Noto Sans", serif` }}
-                    className="flex flex-col  rounded-lg p-4 text-sm gap-4 shadow-lg "
+                    className="flex flex-col  rounded-lg p-4 text-sm gap-4 shadow-lg"
                 >
                     <div className="font-semibold lg:font-light lg:text-base">
                         <span>
@@ -137,13 +137,13 @@ function Jumbotron() {
                 whileHover="hover"
             >
                 <motion.div 
-                    className="absolute lg:w-60 md:w-40 rounded-lg z-10"
-                    initial={{ rotate: -10, top: "20%", left: "20%" }}
+                    className="absolute lg:w-40 xl:w-45 2xl:w-50 rounded-lg z-10"
+                    initial={{ rotate: -10, top: "20%", left: "23%" }}
 
                     variants={{
                         hover: { 
                             rotate: 0,
-                            top: "5%",
+                            top: "2%",
                             left: "15%",
                             transition: { duration: 0.3 }
                         }
@@ -153,13 +153,13 @@ function Jumbotron() {
                 </motion.div>
 
                 <motion.div 
-                    className="absolute w-60 rounded-lg z-20"
+                    className="absolute lg:w-40 xl:w-45 2xl:w-50 rounded-lg z-20"
                     initial={{ rotate: 3, top: "20%", right: "20%" }}
                     variants={{
                         hover: { 
                             rotate: 0,
-                            top: "5%",
-                            right: "12%",
+                            top: "2%",
+                            right: "10%",
                             transition: { duration: 0.3 }
                         }
                     }}
@@ -168,12 +168,12 @@ function Jumbotron() {
                 </motion.div>
 
                 <motion.div 
-                    className="absolute w-60 rounded-lg z-30"
+                    className="absolute lg:w-40 xl:w-45 2xl:w-50 rounded-lg z-30"
                     initial={{ rotate: -7, bottom: "10%", left: "20%" }}
                     variants={{
                         hover: { 
                             rotate: 0,
-                            bottom: "10%",
+                            bottom: "1%",
                             left: "15%",
                             transition: { duration: 0.3 }
                         }
@@ -183,13 +183,13 @@ function Jumbotron() {
                 </motion.div>
 
                 <motion.div 
-                    className="absolute w-60 rounded-lg z-40"
+                    className="absolute lg:w-40 xl:w-45 2xl:w-50 rounded-lg z-40"
                     initial={{ rotate: 8, bottom: "10%", right: "20%" }}
                     variants={{
                         hover: { 
                             rotate: 0,
-                            bottom: "10%",
-                            right: "12%",
+                            bottom: "1%",
+                            right: "10%",
                             transition: { duration: 0.3 }
                         }
                     }}
