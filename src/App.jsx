@@ -33,7 +33,6 @@ function App() {
                                 path="detail/:id"
                                 Component={PropertyDetail}
                             />
-                            <Route path="*" Component={ErrorPage} />
                         </Route>
                     </Routes>
                 </BrowserRouter>
