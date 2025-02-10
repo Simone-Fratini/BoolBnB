@@ -16,6 +16,8 @@ export const useGetPropertiesQuery = () => {
         },
     });
 };
+
+
 export const useGetPropertyQuery = (id) => {
     return useQuery({
         queryKey: ["properties", id],
@@ -104,12 +106,12 @@ export const useAddReviewQuery = (id) => {
         onSettled: () => {
             queryClient.invalidateQueries(["reviews", id]);
         },
-        // // * no optimistic update
         // onSuccess: () => {
         //     queryClient.invalidateQueries(["reviews", id]);
         // },
     });
 };
+
 
 function findMaxId(array) {
     if (!array.length) return undefined;
