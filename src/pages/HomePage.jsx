@@ -42,9 +42,9 @@ function SearchAndFilterSection() {
 
     return (
         <>
-            <div className="border-b p-3 bg-white w-screen border-gray-300 fixed top-0 z-10 rounded-b-2xl">
+            <div className="border-b p-3 bg-white w-screen border-gray-300 fixed top-[-1px] sm:top-19 z-20 rounded-b-2xl">
                 <div className="overflow-x-auto">
-                    <div className="flex gap-10 min-w-max px-2 [&>div]:w-[40px]">
+                    <div className="flex justify-center gap-10 min-w-max px-2 [&>div]:w-[40px]">
                         {filters.map((filter) => (
                             <div
                                 key={filter}
@@ -72,7 +72,7 @@ function Jumbotron() {
 
     const handleExploreClick = () => {
         window.scrollTo({
-            top: jumboRef.current.offsetHeight,
+            top: jumboRef.current.offsetHeight + 5,
             behavior: "smooth",
         });
     };
@@ -80,9 +80,9 @@ function Jumbotron() {
     return (
         <section
             ref={jumboRef}
-            className="h-[85vh] relative z-20 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2"
+            className="sm:h-[80vh] h-[87vh] relative z-30 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2 rounded-b-4xl"
         >
-            <div className=" flex flex-col gap-8 items-start">
+            <div className=" flex flex-col gap-8 items-center sm:items-start">
                 <div
                     style={{ fontFamily: `"Noto Sans", serif` }}
                     className="flex flex-col gap-4"

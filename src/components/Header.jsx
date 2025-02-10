@@ -19,7 +19,8 @@ const Header = () => {
         <>
             <header
                 className={`${!isVisible && "-translate-y-20"}
-                sm:!-translate-0 flex bg-linear-90/oklch sm:drop-shadow-lg from-[#d4c685] to-[#a7d3a6] text-center p-5 lg:px-8 justify-between fixed sm:sticky w-screen top-[-1px] z-30 text-stone-800 text-sm transition-all duration-200 ease-in`}
+                rounded-b-2xl sm:rounded-b-none
+                sm:!-translate-0 flex bg-linear-90/oklch sm:drop-shadow-lg from-[#d4c685] to-[#a7d3a6] text-center p-5 lg:px-8 justify-between fixed sm:sticky w-screen top-[-1px] z-40 text-stone-800 text-sm transition-all duration-200 ease-in`}
             >
                 <Link to="/">
                     <img
@@ -34,7 +35,7 @@ const Header = () => {
                 </NavLink>
             </header>
             {/* navbar mobile*/}
-            <nav className="bg-[#fcfcfc] bottom-[-1px] w-screen py-3 border-t-2 rounded-2xl border-t-stone-300 z-10 fixed grid grid-cols-3 md:hidden">
+            <nav className="bg-[#fcfcfc] bottom-[-1px] w-screen py-3 border-t-2 rounded-2xl border-t-stone-300 z-30 fixed grid grid-cols-3 md:hidden">
                 <NavLink
                     to="/search"
                     className={({ isActive }) =>
