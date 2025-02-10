@@ -3,6 +3,14 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 function ErrorPage() {
+    // Disable scrolling
+    React.useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = 'auto'; // Reset on component unmount
+        };
+    }, []);
+
     const digitAnimationLeft = {
         y: [0, -110, -110, 0, 110, 110, 0],   // Su, destra, giù, giu, sinistra, su e ritorno al centro
         x: [0, 0, 200, 200, 200, 0, 0], 
@@ -24,8 +32,11 @@ function ErrorPage() {
     };
 
     return (
-        <div className="h-screen flex justify-center items-center bg-gradient-to-br from-blue-400 via-blue-800 to-blue-950">
-            <div className="text-center">
+        <div className="h-screen overflow-hidden flex justify-center items-center bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] relative">
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black opacity-20"></div>
+
+            <div className="text-center relative z-10">
                 {/* 404 */}
                 <div className="text-white text-9xl font-bold italic">
                     <motion.span className="inline-block" animate={digitAnimationLeft}>4</motion.span>
@@ -35,13 +46,13 @@ function ErrorPage() {
 
                 {/* messaggio */}
                 <div className="text-gray-400 font-bold mt-28 mb-8">
-                    <div className='text-3xl text-gray-300'>Oh no! Sembra che ti sia perso.</div>
-                    <div className='pt-3'>La pagina che stai cercando potrebbe essere stata rimossa, rinominata o temporaneamente non disponibile.</div>
+                    <div className='text-3xl text-stone-800 '>Oh no! Sembra che ti sia perso.</div>
+                    <div className='pt-3 text-stone-800 opacity-70'>La pagina che stai cercando potrebbe essere stata rimossa, rinominata o temporaneamente non disponibile.</div>
                 </div>
 
                 {/* bottone */}
-                <Link to="/home">
-                    <button className="bg-white text-blue-600 font-bold px-6 py-3 rounded-2xl shadow-xl transition-transform duration-300 hover:scale-110">
+                <Link to="/">
+                    <button className="bg-white opacity-60 text-blue-600 font-bold px-6 py-3 rounded-2xl shadow-xl transition-transform duration-300 hover:scale-110 cursor-pointer">
                         Return to homepage
                     </button>
                 </Link>
