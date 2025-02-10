@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import CardsSection from "../components/CardsSection";
-import { properties } from "../data/properties";
 import Card from "../components/Card";
 import { useGetPropertiesQuery } from "../hooks/useDataQuery";
 import { Link } from "react-router-dom";
@@ -71,12 +70,17 @@ function Jumbotron() {
     const jumboRef = useRef(null);
 
     const handleExploreClick = () => {
-        const jumboHeight = jumboRef?.current?.offsetHeight;
-        window.scrollTo({ top: jumboHeight + 70, behavior: "smooth" });
+        window.scrollTo({
+            top: jumboRef.current.offsetHeight,
+            behavior: "smooth",
+        });
     };
 
     return (
-        <section ref={jumboRef} className="h-[85vh] relative z-20 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2">
+        <section
+            ref={jumboRef}
+            className="h-[85vh] relative z-20 bg-linear-90/oklch from-[#d4c685] to-[#a7d3a6] text-stone-800 text-center lg:text-start flex items-center p-6 lg:px-[10vw] lg:py-12 justify-center lg:gap-32 lg:[&>div]:w-1/2"
+        >
             <div className=" flex flex-col gap-8 items-start">
                 <div
                     style={{ fontFamily: `"Noto Sans", serif` }}

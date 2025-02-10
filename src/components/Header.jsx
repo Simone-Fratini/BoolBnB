@@ -8,13 +8,18 @@ import {
 } from "react-icons/io";
 import { AiFillHome } from "react-icons/ai";
 import { NavLink, Link } from "react-router-dom";
+import useScroll from "../hooks/useScroll";
 
 const Header = () => {
+
+    // bad practice => numero magico: altezza in px della jumbo
+    const isVisible = useScroll(730);
 
     return (
         <>
             <header
-                className="hidden sm:flex bg-linear-90/oklch drop-shadow-lg from-[#d4c685] to-[#a7d3a6] text-center p-5 lg:px-8 justify-between sticky top-[-1px] z-30 text-stone-800 text-sm"
+                className={`${!isVisible && "-translate-y-20"}
+                sm:!-translate-0 flex bg-linear-90/oklch sm:drop-shadow-lg from-[#d4c685] to-[#a7d3a6] text-center p-5 lg:px-8 justify-between fixed sm:sticky w-screen top-[-1px] z-30 text-stone-800 text-sm transition-all duration-200 ease-in`}
             >
                 <Link to="/">
                     <img
@@ -28,7 +33,6 @@ const Header = () => {
                     <span>Rent with BoolB&B</span>
                 </NavLink>
             </header>
-
             {/* navbar mobile*/}
             <nav className="bg-[#fcfcfc] bottom-[-1px] w-screen py-3 border-t-2 rounded-2xl border-t-stone-300 z-10 fixed grid grid-cols-3 md:hidden">
                 <NavLink
