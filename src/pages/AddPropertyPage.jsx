@@ -1,4 +1,4 @@
-import { address } from "motion/react-client";
+import { address, img } from "motion/react-client";
 import React from "react";
 import { useState, useContext } from "react";
 import { CgDanger } from "react-icons/cg";
@@ -7,6 +7,7 @@ import { CgDanger } from "react-icons/cg";
 function AddPropertyPage() {
   // const { AddProperty } = useContext(GlobalContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
     address: "",
@@ -66,6 +67,16 @@ function AddPropertyPage() {
     event.preventDefault();
 
     if (validateForm()) {
+      const formDataToSend = new FormData();
+
+      Object.keys(formData).forEach((key) => {
+        formDataToSend.append(key, formData[key]);
+      });
+
+      if (selectedFile) {
+        formDataToSend.append("image", selectedFile);
+      }
+
       // AddProperty(formData);
       console.log("Form data inviato:", formData);
     } else {
@@ -251,6 +262,7 @@ function AddPropertyPage() {
                     name="pricePerNight"
                     value={formData.pricePerNight}
                     onChange={handleInputChange}
+                    min={0}
                   />
                 </div>
                 <div>
@@ -329,6 +341,24 @@ function AddPropertyPage() {
               </div>
 
               <div className="col-span-2">
+                <div className="relative">
+                  <label className="text-gray-700">Upload Image</label>
+                  <input
+                    type="file"
+                    className="w-full p-2 border rounded border-gray-300"
+                    onChange={(e) => setSelectedFile(e.target.files[0])}
+                    id="imageInput"
+                  />
+                  <button
+                    type="button"
+                    className="absolute top-[33px] right-1 p-0.5 bg-blue-600 hover:bg-blue-700 text-white px-4 text-sm rounded"
+                    onClick={() => {
+                      document.getElementById("imageInput").click();
+                    }}
+                  >
+                    Upload
+                  </button>
+                </div>
                 <button
                   type="submit"
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg mt-3 transition"
