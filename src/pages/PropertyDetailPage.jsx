@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FaHouse } from "react-icons/fa6";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -8,29 +9,50 @@ import { MdOutlineLocationCity } from "react-icons/md";
 import { imagesUrl } from "../globals/apiUrls";
 import PaginaContact from "../components/PaginaContact";
 import StarsComponent from "../components/StarsComponent";
-
+import { useGetPropertyQuery, useGetReviewsQuery } from "../hooks/useDataQuery";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-
-import { useGetPropertyQuery, useGetReviewsQuery } from "../hooks/useDataQuery";
-
+const newReview = {
+  userName: "",
+  reviewText: "",
+};
+const url = "http://localhost:3000";
+const endPoint = "/reviews";
 function PropertyDetail() {
   const { id } = useParams();
-  // const [isLiked, setIsLiked] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0); // Indice dell'immagine principale
+  const [formData, setFormData] = useState(newReview);
+  const [activeIndex, setActiveIndex] = useState(0);
   // function  addReview(){
 
   // }
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  }
+  function addReview() {
+    axios
+      .post(`${url}${endPoint}`, {
+        user_id: null,
+        property_id: id,
+        title: formData.userName,
+        description: formData.reviewText,
+      })
+      .then((res) => {
+        console.log("Recensione aggiunta con successo:", res.data);
+        setFormData({ userName: "", reviewText: "" });
+      })
+      .catch((err) => {
+        console.error("Errore nell'invio della recensione:", err);
+      });
+  }
+
   //* ACTIONS
   const handleThumbnailClick = (index) => {
     setActiveIndex(index);
   };
-
-  // const toggleLike = () => {
-  //   setIsLiked((curr) => !curr);
-  // todo: qui o fuori (useEffect forse) logica per dec/incrementare likes della property sul db
-  // };
-
   //* QUERIES
   // query per la proprieta
   const {
@@ -66,7 +88,12 @@ function PropertyDetail() {
               className="w-full h-80 rounded-lg object-cover boxShad"
             />
           </div>
-          <div className="flex flex-row sm:flex-col justify-between space-x-2 sm:space-x-0 sm:space-y-2 sm:ml-4 max-h-90 overflow-auto ">
+          {/* img */}
+          <div
+            className="flex flex-row sm:flex-col justify-between space-x-2 sm:space-x-0 sm:space-y-2 sm:ml-4 max-h-90
+         overflow-scroll 
+           "
+          >
             {property.img_endpoints.map((img, index) => (
               <img
                 key={index}
@@ -88,10 +115,6 @@ function PropertyDetail() {
           <div>
             <StarsComponent />
           </div>
-
-          {/* <button onClick={toggleLike} className="text-sm text-black ml-2">
-            {isLiked ? "❤️ Liked" : "🤍 Like"}
-          </button> */}
         </div>
         <div className="flex space-x-4 border-b-2 pb-2 mb-2">
           <p className="text-sm sm:text-base">
@@ -123,6 +146,7 @@ function PropertyDetail() {
           <GiFamilyHouse />
           Tipo di proprietà: {property.property_type}
         </p>
+        {/* la mappa  */}
         <div className="mt-4 boxShad">
           <MapContainer
             center={
@@ -202,12 +226,23 @@ function PropertyDetail() {
           <p>No reviews yet.</p>
         )}
 
+        <input
+          type="text"
+          placeholder="Inserisce il vostro nome "
+          className="mt-4 w-full p-2 border rounded-lg"
+          value={formData.userName}
+          onChange={handleInputChange}
+          name="userName"
+        />
         <textarea
           placeholder="Scrivi una recensione"
           className="mt-4 w-full p-2 border rounded-lg"
+          name="reviewText"
+          value={formData.reviewText}
+          onChange={handleInputChange}
         />
         <button
-          onClick={() => addReview(id, "Nuovo testo recensione")}
+          onClick={addReview}
           className="mt-2 p-2 mb-20 bg-teal-700 text-white rounded-lg"
         >
           Invia recensione
